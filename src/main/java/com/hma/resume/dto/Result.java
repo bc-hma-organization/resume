@@ -40,6 +40,10 @@ public class Result<T>{
 	public void setData(T data) {
 		this.data = data;
 	}
+
+	public Result() {
+		this.success = false;
+	}
 	
 	/**
 	 * 设置返回的结果
@@ -49,5 +53,17 @@ public class Result<T>{
 	public Result(Boolean success, String message) {
 		this.setSuccess(success);
 		this.setMessage(message);
+	}
+
+	/**
+	 * 设置含实体的结果
+	 * @param success
+	 * @param message
+	 * @param data
+	 */
+	public Result(Boolean success, String message, T data){
+		this.setSuccess(success);
+		this.setMessage(message);
+		this.setData(data);
 	}
 }
