@@ -45,16 +45,14 @@ public class UserController extends HttpServlet{
 	 * @return
 	 */
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String loginPost(String username, String password, Model model, HttpSession session, HttpServletRequest request) {
-
+	public @ResponseBody Result<User> loginPost(String username, String password, Model model, HttpSession session, HttpServletRequest request) {
 		Result<User> result = this.userService.checkPassword(username, password);
 		if(result.getSuccess()){
 			//设置username缓存
 			request.getSession(true).setAttribute("username", result.getData().getUserName());
 			session.setMaxInactiveInterval(1800);
 		}
-		model.addAttribute("result", result.getData());
-		return "login";
+		return result;
 	}
 
     /**
