@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 用户控制器
@@ -29,7 +30,7 @@ public class UserController extends HttpServlet{
 	 * 登陆
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
 	}
@@ -56,22 +57,60 @@ public class UserController extends HttpServlet{
 		return "login";
 	}
 
-	/**
-	 * 注册页面
-	 * @return
-	 */
+    /**
+     * 选择注册类型
+     * @return
+     */
 	@RequestMapping(value = "register", method = RequestMethod.GET)
-	public String register(){return "";}
+    public String register(){
+	    return "register";
+    }
+
+    /**
+     * 人才跳转接口，当选择人才后跳转到对应的注册页面
+     * @param type 人才-talent    机构-organization
+     * @return
+     */
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public @ResponseBody String registerPost(String type){
+	    return "redirect:"+ type + "-register";
+    }
 
 	/**
-	 * 提交注册
+	 * 人才注册页面
+	 * @return
+	 */
+	@RequestMapping(value = "talent-register", method = RequestMethod.GET)
+	public String talentRegister(){return "talent-register";}
+
+	/**
+	 * 人才提交注册
 	 * @param user
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public String registerPost(User user, Model model){
+	@RequestMapping(value = "talent-register", method = RequestMethod.POST)
+	public String talentRegisterPost(User user, Model model){
 
-		return "";
+		return "redirect:login";
 	}
+
+    /**
+     * 显示机构注册页面
+     * @return
+     */
+	@RequestMapping(value = "organization-register", method = RequestMethod.GET)
+    public String orgRegister(){
+	    return "organization-register";
+    }
+
+    /**
+     * 提交机构注册信息
+     * @return
+     */
+    @RequestMapping(value = "organization-register", method = RequestMethod.POST)
+    public String orgRegisterPost(){
+
+	    return "redirect: login";
+    }
 }
