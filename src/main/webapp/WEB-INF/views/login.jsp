@@ -25,18 +25,18 @@
         <div class="layui-form-item">
             <label class="layui-form-label login-form"><i class="iconfont">&#xe6b8;</i></label>
             <div class="layui-input-inline login-inline">
-                <input type="text" id="username" name="username" placeholder="请输入你的帐号" autocomplete="off" class="layui-input">
+                <input type="text" id="username" name="username" placeholder="请输入你的帐号" autocomplete="off" class="layui-input" onkeypress="if(event.keyCode==13) ;">
             </div>
         </div>
         <label class="login-title">密码</label>
         <div class="layui-form-item">
             <label class="layui-form-label login-form"><i class="iconfont">&#xe82b;</i></label>
             <div class="layui-input-inline login-inline">
-                <input type="password" id="password" name="password" placeholder="请输入你的密码" autocomplete="off" class="layui-input">
+                <input type="password" id="password" name="password" placeholder="请输入你的密码" autocomplete="off" class="layui-input" onkeypress="if(event.keyCode==13) save();">
             </div>
         </div>
         <div class="form-actions">
-            <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="submit">登录</button>
+            <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="button" onclick="save()">登录</button>
             <div class="forgot"><a href="#" class="forgot">忘记帐号或者密码</a></div>
         </div>
     </form>
@@ -63,38 +63,41 @@
 </div>--%>
 <script>
     var host = getHttpHost();
-    $(function  () {
+    /*$(function  () {
         layui.use('form', function(){
             var form = layui.form();
             //监听提交
-            form.on('submit(login)', function(){
-                var username = $("#username").val();
-                var password = $("#password").val();
-                if(username == ""){
-                    layui.layer.msg("请填写用户名！", {icon: 3, time: 2000, title: "提示"});
-                    return false
-                }else if(password == ""){
-                    layui.layer.msg("请填写密码！", {icon: 3, time: 2000, title: "提示"});
-                    return false
-                }
-                $.ajax({
-                    type: 'post',
-                    url: host+"/login",
-                    data: {username: username, password: password},
-                    async: false,
-                    success: function (re) {
-                        var result = re.data;
-                        if(result.success){
-                            layui.layer.msg(result.message, {icon: 1, time: 2000, title: '提示'});
-                            location.href = "/index.html"
-                        }else{
-                            layui.layer.msg(result.message, {icon: 2, time: 2000, title: '提示'});
-                        }
-                    }
-                })
-            });
+            form.on('submit(login)', function(){});
         });
-    })
+    })*/
+    //提交输入
+    function save() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        if(username == ""){
+            layui.layer.msg("请填写用户名！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }else if(password == ""){
+            layui.layer.msg("请填写密码！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }
+        //提交账号密码
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: host+"/resume/login",
+            data: {'username': username, 'password': password},
+            success: function (re) {
+                if(re.success){
+                    layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'}, function () {
+                        window.location.href = "/resume/index.html"
+                    });
+                }else{
+                    layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
