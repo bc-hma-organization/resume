@@ -58,7 +58,7 @@ public class Info {
 	private String description;
 	
 	/**
-	 * 状态0/1(未启用)
+	 * 信息状态	0-待认证	 1-已认证 -1-非认证
 	 */
 	@Column(name = "status")
 	private Integer status;
