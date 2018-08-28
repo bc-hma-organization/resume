@@ -5,7 +5,7 @@ public class Result<T>{
 	/**
 	 * 结果
 	 */
-	private Boolean success;
+	private Boolean success = false;
 	
 	/**
 	 * 消息

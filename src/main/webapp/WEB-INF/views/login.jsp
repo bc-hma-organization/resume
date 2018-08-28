@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="form-actions">
-            <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="submit">登录</button>
+            <button id="btnSubmit" class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="button">登录</button>
             <div class="forgot"><a href="#" class="forgot">忘记帐号或者密码</a></div>
         </div>
     </form>
@@ -63,37 +63,54 @@
 </div>--%>
 <script>
     var host = getHttpHost();
-    $(function  () {
+    /*$(function  () {
         layui.use('form', function(){
             var form = layui.form();
             //监听提交
             form.on('submit(login)', function(){
-                var username = $("#username").val();
-                var password = $("#password").val();
-                if(username == ""){
-                    layui.layer.msg("请填写用户名！", {icon: 3, time: 2000, title: "提示"});
-                    return false
-                }else if(password == ""){
-                    layui.layer.msg("请填写密码！", {icon: 3, time: 2000, title: "提示"});
-                    return false
-                }
-                $.ajax({
-                    type: 'post',
-                    url: host+"/login",
-                    data: {username: username, password: password},
-                    async: false,
-                    success: function (re) {
-                        var result = re.data;
-                        if(result.success){
-                            layui.layer.msg(result.message, {icon: 1, time: 2000, title: '提示'});
-                            location.href = "/index.html"
-                        }else{
-                            layui.layer.msg(result.message, {icon: 2, time: 2000, title: '提示'});
-                        }
-                    }
-                })
             });
         });
+    })*/
+
+    //用户名enter则聚焦到密码输入
+    $("#username").keydown(function (e) {
+        if(e.keyCode==13){
+            $("#password").focus().select();
+        }
+    });
+
+    $("#password").keydown(function (e) {
+        if(e.keyCode==13){
+            $("#btnSubmit").click()
+        }
+    });
+
+    //提交表单
+    $("#btnSubmit").click(function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        if(username == ""){
+            layui.layer.msg("请填写用户名！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }else if(password == ""){
+            layui.layer.msg("请填写密码！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }
+        //保存数据
+        $.ajax({
+            type: 'post',
+            url: host+"/resume/login",
+            data: {'username': username, 'password': password},
+            async: false,
+            success: function (re) {
+                if(re.success){
+                    layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
+                    location.href = "/resume/index.html"
+                }else{
+                    layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
+                }
+            }
+        })
     })
 </script>
 </body>

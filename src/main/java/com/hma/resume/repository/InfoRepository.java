@@ -8,13 +8,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * 信息持久层
+ */
 @Repository
 public interface InfoRepository extends CrudRepository<Info, Integer>{
 
-    @Query(value = "SELECT u.ID,u.turename,u.sex,u.age,u.phone,u.identityCard FROM user u INNER JOIN info i ON u.id = i.userID where i.company = ?1", nativeQuery = true)
-    //@Query(value = "select * from info where company=?1", nativeQuery = true)
-    List<User> findInfoByCompany(String company);
+    @Query(value = "SELECT * FROM info where userID = ?1", nativeQuery = true)
+    List<Info> findInfoByUserId(Integer userId);
 
-    //@Query("SELECT u.username FROM user u INNER JOIN info  i ON u.ID = i.userID where u.ID = ?1")
-    List<Object> findInfoByUserId(Integer userId);
+    //@Query(value = "update info set status = ?2 where infoId = ?1", nativeQuery = true)
+    @Query(value = "update info set status = ?2 where ID = ?1", nativeQuery = true)
+    void updateStatusById(Integer infoId, Integer status);
+
+
+
 }

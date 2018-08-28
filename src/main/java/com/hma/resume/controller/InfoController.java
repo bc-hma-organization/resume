@@ -5,8 +5,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/info")
 @Transactional
 public class InfoController {
-	
+
+    @RequestMapping(value = "testJSP")
+    public String testJSP(){
+        return "info/upinfo";
+    }
+
 }

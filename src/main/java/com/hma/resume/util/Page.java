@@ -9,13 +9,17 @@ public class Page {
 
 	public static int page(Integer indexNum,Integer MAX_NUM) {
 		int pageNum = 0;
-		if (indexNum < MAX_NUM) {
+		if (indexNum <= 0){
 			pageNum = 1;
-		} else {
-			if (indexNum % MAX_NUM == 0) {
-				pageNum = pageNum / MAX_NUM;
+		}else {
+			if (indexNum < MAX_NUM) {
+				pageNum = 1;
 			} else {
-				pageNum = (pageNum / MAX_NUM) + 1;
+				if (indexNum % MAX_NUM == 0) {
+					pageNum = indexNum / MAX_NUM;
+				} else {
+					pageNum = (indexNum / MAX_NUM) + 1;
+				}
 			}
 		}
 		return pageNum;
