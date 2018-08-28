@@ -16,11 +16,11 @@
     <script type="text/javascript" src="${ctx}/statics/js/request.js"></script>
 </head>
 <body>
-<div class="login-logo"><h1>区块链</h1></div>
+<div class="login-logo" style="text-align: center;"><span style="font-size: 30px;">登录</span></div>
 <div class="login-box">
     <form class="layui-form layui-form-pane" method="post">
 
-        <h3>登录你的帐号</h3>
+        <h3 style="text-align: center;"><img src="${ctx}/statics/images/login/logo.png" style="height: 100px;width: 100px;"></h3>
         <label class="login-title">帐号</label>
         <div class="layui-form-item">
             <label class="layui-form-label login-form"><i class="iconfont">&#xe6b8;</i></label>
@@ -37,7 +37,7 @@
         </div>
         <div class="form-actions">
             <button id="btnSubmit" class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="button">登录</button>
-            <div class="forgot"><a href="#" class="forgot">忘记帐号或者密码</a></div>
+            <div class="forgot"><a id="register" href="javascript: ;" class="forgot">注册</a></div>
         </div>
     </form>
 </div>
@@ -63,6 +63,12 @@
 </div>--%>
 <script>
     var host = getHttpHost();
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.config({
+            skin: 'layui-layer-lan'
+        });
+    });
     /*$(function  () {
         layui.use('form', function(){
             var form = layui.form();
@@ -105,12 +111,17 @@
             success: function (re) {
                 if(re.success){
                     layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
-                    location.href = "/resume/index.html"
+                    location.href = host+"/resume/index.html"
                 }else{
                     layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
                 }
             }
         })
+    });
+
+    //注册
+    $("#register").click(function () {
+        location.href = host+"/resume/register"
     })
 </script>
 </body>
