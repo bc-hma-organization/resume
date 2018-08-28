@@ -53,7 +53,7 @@ public class OrganizationController {
             session.setAttribute(company + "_MAX_PAGE", pageNum);
             return "user_info_list";
         }else {
-            return "404";
+            return "menu/404";
         }
     }
 
@@ -70,7 +70,7 @@ public class OrganizationController {
             model.addAttribute("infoList", infoList);
             return "user_info";
         }else {
-            return  "404";
+            return  "menu/404";
         }
     }
 

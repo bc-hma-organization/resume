@@ -95,6 +95,8 @@ public class UserService {
             //设置该用户为机构用户
             user.setOrganizationID(organizationSave.getId());
             this.userRepository.save(user);
+            result.setSuccess(true);
+            result.setMessage("注册成功");
         }
 	    return result;
     }
