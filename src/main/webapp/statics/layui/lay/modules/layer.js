@@ -129,12 +129,12 @@ var layer = {
       resize: false,
       end: end
     }, (type && !ready.config.skin) ? {
-      skin: skin + ' layui-layer-hui',
+      skin: skin + ' layui-layer-lan',
       anim: anim
     } : function(){
        options = options || {};
        if(options.icon === -1 || options.icon === undefined && !ready.config.skin){
-         options.skin = skin + ' ' + (options.skin||'layui-layer-hui');
+         options.skin = skin + ' ' + (options.skin||'layui-layer-lan');
        }
        return options;
     }()));  
