@@ -57,6 +57,17 @@ public class UserController extends HttpServlet{
 	}
 
     /**
+     * 注销账号，登出
+     * @param session
+     * @return
+     */
+	@RequestMapping(value = "logout")
+    public @ResponseBody Integer logout(HttpSession session){
+	    session.invalidate();
+	    return 1;
+    }
+
+    /**
      * 选择注册类型
      * @return
      */
@@ -80,7 +91,9 @@ public class UserController extends HttpServlet{
 	 * @return
 	 */
 	@RequestMapping(value = "talent-register", method = RequestMethod.GET)
-	public String talentRegister(){return "talent-register";}
+	public String talentRegister(){
+	    return "talent-register";
+	}
 
 	/**
 	 * 人才提交注册
@@ -92,6 +105,17 @@ public class UserController extends HttpServlet{
         Result result = this.userService.saveRegister(user);
 		return result;
 	}
+
+    /**
+     * 查找机构key是否已被注册
+     * @param organizationKey
+     * @return
+     */
+	@RequestMapping(value = "checkOrganizationKey", method = RequestMethod.POST)
+    public @ResponseBody Result checkOrganizationKey(String organizationKey){
+	    Result result = this.userService.checkOrganizationKey(organizationKey);
+        return result;
+    }
 
     /**
      * 显示机构注册页面
@@ -107,8 +131,8 @@ public class UserController extends HttpServlet{
      * @return
      */
     @RequestMapping(value = "organization-register", method = RequestMethod.POST)
-    public Result orgRegisterPost(User user, Organization organization){
-        Result result = new Result();
+    public @ResponseBody Result orgRegisterPost(User user, Organization organization){
+        Result result = this.userService.saveOrgRegister(user, organization);
 	    return result;
     }
 }
