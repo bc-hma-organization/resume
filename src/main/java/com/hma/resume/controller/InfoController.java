@@ -11,7 +11,7 @@ public class InfoController {
 
     @RequestMapping(value = "testJSP")
     public String testJSP(){
-        return "info/upinfo";
+        return "talent-register";
     }
 
 }
