@@ -83,7 +83,7 @@ public class UserController extends HttpServlet{
      */
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public @ResponseBody String registerPost(String type){
-	    return "redirect:"+ type + "-register";
+	    return type + "-register";
     }
 
 	/**

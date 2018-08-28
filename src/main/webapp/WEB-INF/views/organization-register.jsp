@@ -19,26 +19,132 @@
     <script src="${ctx}/statics/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${ctx}/statics/js/xadmin.js"></script>
     <script type="text/javascript" src="${ctx}/statics/js/request.js"></script>
+    <script type="text/javascript" src="${ctx}/statics/js/area.js"></script>
 </head>
 <body>
-    <div class="jump">
-        <div class="j_top"><p>请选择入口：</p></div>
-        <div class="j_main">
-            <div class="to_talent">
-                <img onclick="gotopage1()" src="${ctx}/statics/images/img_talent.png" title="人才">
-            </div>
-            <div class="to_organiza">
-                <img onclick="gotopage2()" src="${ctx}/statics/images/img_organiza.png" title="机构">
-            </div>
+    <div class="talent_register">
+        <div class="back"><img src="${ctx}/statics/images/back.jpg" width="60"></div>
+        <div class="t_top">
+            <p><strong>机构注册</strong></p>
+        </div>
+        <div class="t_main">
+            <form class="layui-form layui-form-pane" method="post">
+                <table>
+                    <colgroup>
+                        <col width="20%">
+                        <col width="60%">
+                        <col width="20%">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>用户名：</td>
+                        <td>
+                            <input type="text" id="username" name="username" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_username"></span></td>
+                    </tr>
+                    <tr>
+                        <td>密码：</td>
+                        <td>
+                            <input type="password" id="password" name="password" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_pass"></span></td>
+                    </tr>
+                    <tr>
+                        <td>确认密码：</td>
+                        <td>
+                            <input type="password" id="repass" name="repass" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_repass"></span></td>
+                    </tr>
+                    <tr>
+                        <td>机构名称：</td>
+                        <td>
+                            <input type="text" id="organizaName" name="organizaName" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_organizaName"></span></td>
+                    </tr>
+                    <tr>
+                        <td>机构码：</td>
+                        <td>
+                            <input type="text" id="organizaKey" name="organizaKey" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_organizaKey"></span></td>
+                    </tr>
+                    <%--<tr>
+                        <td>机构logo：</td>
+                        <td>
+                            <img class="layui-upload-img" id="demo1">
+                            <p id="demoText"></p>
+                        </td>
+                        <td><button type="button" class="layui-btn" id="test1">上传图片</button></td>
+                    </tr>--%>
+                    <tr>
+                        <td>机构地址：</td>
+                        <td>
+                            <div id="area"></div>
+                        </td>
+                        <td><span class="msg" id="msg_organizaAddress"></span></td>
+                    </tr>
+                    <tr>
+                        <td>机构号码：</td>
+                        <td>
+                            <input type="text" id="organizaPhone" name="organizaPhone" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_organizaPhone"></span></td>
+                    </tr>
+                    <tr>
+                        <td>法人名称：</td>
+                        <td>
+                            <input type="text" id="legalPerson" name="legalPerson" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_legalPerson"></span></td>
+                    </tr>
+                    <tr>
+                        <td>联系人：</td>
+                        <td>
+                            <input type="text" id="contact" name="contact" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_contact"></span></td>
+                    </tr>
+                    <tr>
+                        <td>联系人号码：</td>
+                        <td>
+                            <input type="text" id="contactPhone" name="contactPhone" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_contactPhone"></span></td>
+                    </tr>
+                    <tr>
+                        <td>机构简介：</td>
+                        <td>
+                            <input type="text" id="description" name="description" onblur="inputIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_description"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="btn_box">
+                    <button id="btn_sub" type="button" class="layui-btn layui-btn-primary layui-btn-radius">提交</button>
+                    <button id="btn_re" type="button" class="layui-btn layui-btn-primary layui-btn-radius">重置</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>
 <script>
-    function gotopage1() {
-        location.href = "/index.html"
-    }
-    function gotopage2() {
-        location.href = "/index.html"
+    function inputIsNull() {
+        var username = $('#username').val();
+        var repass = $('#repass').val();
+        var organizaName = $('#organizaName').val();
+        var organizaKey = $('#organizaKey').val();
+        var organizaAddress = $('#organizaAddress').val();
+        var organizaPhone = $('#organizaPhone').val();
+        var legalPerson = $('#legalPerson').val();
+        var contact = $('#contact').val();
+        var contactPhone = $('#contactPhone').val();
+        var description = $('#description').val();
+
     }
 
 </script>

@@ -27,35 +27,113 @@
             <p><strong>人才注册</strong></p>
         </div>
         <div class="t_main">
-            <form>
-                <div class="input_box">
-                    <p>用户名：<p/>
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
+            <form class="layui-form layui-form-pane" method="post">
+                <table>
+                    <colgroup>
+                        <col width="20%">
+                        <col width="60%">
+                        <col width="20%">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>用户名：</td>
+                        <td>
+                            <input type="text" id="username" name="username" onblur="usernameIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_username"></span></td>
+                    </tr>
+                    <tr>
+                        <td>密码：</td>
+                        <td>
+                            <input type="password" id="password" name="password" onblur="passIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_pass"></span></td>
+                    </tr>
+                    <tr>
+                        <td>确认密码：</td>
+                        <td>
+                            <input type="password" id="repass" name="repass" onblur="repassIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_repass"></span></td>
+                    </tr>
+                    <tr>
+                        <td>用户名邮箱：</td>
+                        <td>
+                            <input type="text" id="email" name="eamil" onblur="emailIsNull()" lay-verify="required" autocomplete="off" class="layui-input">
+                        </td>
+                        <td><span class="msg" id="msg_email"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="btn_box">
+                    <button id="btn_sub" type="button" class="layui-btn layui-btn-primary layui-btn-radius">提交</button>
+                    <button id="btn_re" type="button" class="layui-btn layui-btn-primary layui-btn-radius">重置</button>
                 </div>
-                <div class="input_box">
-                    <p>密码：<p/>
-                    <input type="password" name="title" lay-verify="title" autocomplete="off" class="layui-input">
-                </div>
-                <div class="input_box">
-                    <p>确认密码：<p/>
-                    <input type="password" name="title" lay-verify="title" autocomplete="off" class="layui-input">
-                </div>
-                <div class="input_box">
-                    <p>邮箱：<p/>
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
-                </div>
-                <div class="input_box">
-                    <button id="btn_sub" class="layui-btn layui-btn-fluid">提交</button>
-                    <button id="btn_re" class="layui-btn layui-btn-fluid">重置</button>
-                </div>
-
-
             </form>
         </div>
     </div>
 </body>
 <script>
+    var host = getHttpHost();
+    function usernameIsNull() {
+        var username = $('#username').val();
+        if (username == "") {
+            layui.layer.msg("请填写用户名！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }
+    }
+    function passIsNull() {
+        var pass = $('#password').val();
+        if (pass == "") {
+            layui.layer.msg("请填写密码！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }
+    }
+    function repassIsNull() {
+        var repass = $('#repass').val();
+        var pass = $('#password').val();
+        if (repass == "") {
+            layui.layer.msg("请填写确认密码！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }
+        if (repass != pass) {
+            layui.layer.msg("确认密码要与密码一致！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }
+    }
+    function emailIsNull() {
+        var email = $('#email').val();
+        if (email == "") {
+            layui.layer.msg("请填写邮箱！", {icon: 3, time: 2000, title: "提示"});
+            return false
+        }
+    }
+    $('#btn_sub').click(function () {
 
-
+        usernameIsNull();
+        passIsNull();
+        repassIsNull();
+        emailIsNull();
+        var user;
+        user
+        var username = $('#username').val();
+        var pass = $('#password').val();
+        var email = $('#email').val();
+        $.ajax({
+            type : 'post',
+            url :  host+"/resume/talent-register",
+            data : {'userName': username, 'password': pass, 'email': email, 'status': 1},
+            async: false,
+            success: function (re) {
+                if(re.success){
+                    layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
+                    location.href = "/resume/login"
+                }else{
+                    layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
+                }
+            }
+        })
+    })
 </script>
 </html>
