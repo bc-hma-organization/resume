@@ -25,6 +25,11 @@ public class UserController extends HttpServlet{
 	
 	@Autowired
 	private UserService userService;
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String initLogin(){
+		return "login";
+	}
 	
 	/**
 	 * 登陆
