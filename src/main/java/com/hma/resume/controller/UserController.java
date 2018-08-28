@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.hma.resume.domain.Organization;
 import com.hma.resume.domain.User;
 import com.hma.resume.dto.Result;
 import com.hma.resume.service.UserService;
@@ -26,11 +27,6 @@ public class UserController extends HttpServlet{
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String initLogin(){
-		return "login";
-	}
-	
 	/**
 	 * 登陆
 	 * @return
@@ -89,13 +85,12 @@ public class UserController extends HttpServlet{
 	/**
 	 * 人才提交注册
 	 * @param user
-	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "talent-register", method = RequestMethod.POST)
-	public String talentRegisterPost(User user, Model model){
-
-		return "redirect:login";
+	public @ResponseBody Result talentRegisterPost(User user){
+        Result result = this.userService.saveRegister(user);
+		return result;
 	}
 
     /**
@@ -112,8 +107,8 @@ public class UserController extends HttpServlet{
      * @return
      */
     @RequestMapping(value = "organization-register", method = RequestMethod.POST)
-    public String orgRegisterPost(){
-
-	    return "redirect: login";
+    public Result orgRegisterPost(User user, Organization organization){
+        Result result = new Result();
+	    return result;
     }
 }
