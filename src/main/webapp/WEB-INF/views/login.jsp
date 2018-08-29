@@ -8,59 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${ctx}/statics/css/font.css">
     <link rel="stylesheet" href="${ctx}/statics/css/xadmin.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
     <script src="${ctx}/statics/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${ctx}/statics/js/xadmin.js"></script>
     <script type="text/javascript" src="${ctx}/statics/js/request.js"></script>
 </head>
-<body>
-<div class="login-logo" style="text-align: center;"><span style="font-size: 30px;">登录</span></div>
-<div class="login-box">
-    <form class="layui-form layui-form-pane" method="post">
+<body class="login-bg">
 
-        <h3 style="text-align: center;"><img src="${ctx}/statics/images/login/logo.png" style="height: 100px;width: 100px;"></h3>
-        <label class="login-title">帐号</label>
-        <div class="layui-form-item">
-            <label class="layui-form-label login-form"><i class="iconfont">&#xe6b8;</i></label>
-            <div class="layui-input-inline login-inline">
-                <input type="text" id="username" name="username" placeholder="请输入你的帐号" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <label class="login-title">密码</label>
-        <div class="layui-form-item">
-            <label class="layui-form-label login-form"><i class="iconfont">&#xe82b;</i></label>
-            <div class="layui-input-inline login-inline">
-                <input type="password" id="password" name="password" placeholder="请输入你的密码" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="form-actions">
-            <button id="btnSubmit" class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="button">登录</button>
-            <div class="forgot"><a id="register" href="javascript: ;" class="forgot">注册</a></div>
-        </div>
+<div class="login layui-anim layui-anim-up">
+    <div style="text-align: center;"><img src="${ctx}/statics/images/login/logo.png" style="width: 100px;height: 100px;margin-bottom: 10px;"></div>
+    <form method="post" class="layui-form" >
+        <input id="username" name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <hr class="hr15">
+        <input id="password" name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+        <hr class="hr15">
+        <input id="btnSubmit" value="登录" lay-submit lay-filter="login" style="width:100%;" type="button">
+        <hr class="hr20" >
     </form>
 </div>
-<%--<div class="bg-changer">
-    <div class="swiper-container changer-list">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/a.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/b.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/c.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/d.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/e.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/f.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/g.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/h.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/i.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/j.jpg" alt=""></div>
-            <div class="swiper-slide"><img class="item" src="${ctx}/statics/images/k.jpg" alt=""></div>
-            <div class="swiper-slide"><span class="reset">初始化</span></div>
-        </div>
-    </div>
-    <div class="bg-out"></div>
-    <div id="changer-set"><i class="iconfont">&#xe696;</i></div>
-</div>--%>
 <script>
     var host = getHttpHost();
     layui.use('layer', function () {
@@ -110,8 +75,9 @@
             async: false,
             success: function (re) {
                 if(re.success){
-                    layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
-                    location.href = host+"/resume/index.html"
+                    layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'}, function () {
+                        location.href = host+"/resume/index"
+                    });
                 }else{
                     layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
                 }

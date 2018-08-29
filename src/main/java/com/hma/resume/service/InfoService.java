@@ -21,6 +21,9 @@ public class InfoService {
 	private InfoRepository infoRepository;
 
 	@Autowired
+    private UserService userService;
+
+	@Autowired
 	private UserRepository userRepository;
 
     /**
@@ -63,4 +66,16 @@ public class InfoService {
 		}
 		return result;
 	}
+
+    /**
+     * 获取当前用户的信息
+     * @param session
+     * @return
+     */
+	public User getCurrentUser(HttpSession session){
+	    String username = session.getAttribute("username").toString();
+	    return this.userService.findByUserName(username);
+    }
+
+
 }

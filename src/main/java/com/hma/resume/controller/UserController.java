@@ -57,6 +57,26 @@ public class UserController extends HttpServlet{
 	}
 
     /**
+     * 显示首页信息
+     * @return
+     */
+	@RequestMapping(value = "index", method = RequestMethod.GET)
+    public String showIndex(Model model, HttpSession session){
+	    model.addAttribute("username", session.getAttribute("username").toString());
+	    return "index";
+    }
+
+    /**
+     * 欢迎页
+     * @return
+     */
+    @RequestMapping(value = "welcome", method = RequestMethod.GET)
+    public String showWelcome(Model model, HttpSession session){
+        model.addAttribute("username", session.getAttribute("username").toString());
+	    return "welcome";
+	}
+
+    /**
      * 注销账号，登出
      * @param session
      * @return
