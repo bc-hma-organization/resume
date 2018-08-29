@@ -19,7 +19,8 @@
     <script src="${ctx}/statics/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${ctx}/statics/js/xadmin.js"></script>
     <script type="text/javascript" src="${ctx}/statics/js/request.js"></script>
-    <script type="text/javascript" src="${ctx}/statics/js/area.js"></script>
+
+    <script type="text/javascript" src="${ctx}/statics/js/address.js"></script>
 </head>
 <body>
     <div class="talent_register">
@@ -83,7 +84,21 @@
                     <tr>
                         <td>机构地址：</td>
                         <td>
-                            <div id="area"></div>
+                            <div class="layui-input-inline">
+                                <select name="province" lay-filter="province" class="province">
+                                    <option value="">请选择省</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="city" lay-filter="city" disabled>
+                                    <option value="">请选择市</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="area" lay-filter="area" disabled>
+                                    <option value="">请选择县/区</option>
+                                </select>
+                            </div>
                         </td>
                         <td><span class="msg" id="msg_organizaAddress"></span></td>
                     </tr>
@@ -148,4 +163,15 @@
     }
 
 </script>
+<script type="text/javascript" src="${ctx}/statics/js/address.js"></script>
+<script type="text/javascript">
+    layui.config({
+        base : "${ctx}/statics/js/" //address.js的路径
+    }).use([ 'layer', 'jquery', "address" ], function() {
+        var layer = layui.layer, $ = layui.jquery, address = layui.address();
+
+    });
+</script>
+
+
 </html>
