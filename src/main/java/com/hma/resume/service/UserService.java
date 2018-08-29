@@ -145,4 +145,13 @@ public class UserService {
 	public User findById(Integer id){
 		return this.userRepository.findById(id);
 	}
+
+	/**
+	 * 根据username查找用户
+	 * @param username
+	 * @return
+	 */
+	public User findByUserName(String username){
+		return this.userRepository.findByUserName(username);
+	}
 }

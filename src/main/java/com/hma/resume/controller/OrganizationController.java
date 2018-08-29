@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +20,7 @@ import java.util.List;
  * 机构控制层
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/organization")
 @Transactional
 public class OrganizationController {
 
@@ -88,6 +89,12 @@ public class OrganizationController {
         }else {
             return  "flase";
         }
+    }
+
+    @RequestMapping(value = "approveInfo-list", method = RequestMethod.GET)
+    public String approveList(Model model){
+
+        return "organization/approveInfo-list";
     }
 }
 // endregien
