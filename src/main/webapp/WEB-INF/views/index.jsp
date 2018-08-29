@@ -32,11 +32,9 @@
     </ul>-->
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">${username}</a>
+            <a href="javascript:;">${user.turename}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
-                <dd><a href="">切换帐号</a></dd>
-                <dd><a href="./login.html">退出</a></dd>
+                <dd><a href="javascript:;" onclick="exit()">退出</a></dd>
             </dl>
         </li>
     </ul>
@@ -48,22 +46,28 @@
 <div class="left-nav">
     <div id="side-nav">
         <ul id="nav">
-
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b2;</i>
-                    <cite>认证简历</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="order-list.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>订单列表</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
+            <c:if test="${not empty user.organizationID}">
+                <li>
+                    <a _href="javascript:;">
+                        <i class="iconfont">&#xe6b2;</i>
+                        <cite>认证简历</cite>
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${empty user.organizationID}">
+                <li>
+                    <a _href="javascript:;">
+                        <i class="layui-icon">&#xe66f;</i>
+                        <cite>修改个人信息</cite>
+                    </a>
+                </li>
+                <li>
+                    <a _href="./info/upInfo">
+                        <i class="layui-icon">&#xe6b2;</i>
+                        <cite>简历信息</cite>
+                    </a>
+                </li>
+            </c:if>
         </ul>
     </div>
 </div>
@@ -91,6 +95,20 @@
 </div>
 <!-- 底部结束 -->
 <script>
+    var host = getHttpHost();
+    //退出
+    function exit() {
+        $.ajax({
+            type: 'post',
+            url: host + '/resume/logout',
+            async: false,
+            success: function (re) {
+                if(re == 1){
+                    location.href = host+"/resume/login"
+                }
+            }
+        })
+    }
 </script>
 </body>
 </html>

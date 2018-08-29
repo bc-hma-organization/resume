@@ -95,6 +95,7 @@ public class UserService {
             Organization organizationSave = this.organizationRepository.findByOrganizaKey(organization.getOrganizaKey());
             //设置该用户为机构用户
             user.setOrganizationID(organizationSave.getId());
+            user.setTurename(organizationSave.getOrganizaName());
             this.userRepository.save(user);
             result.setSuccess(true);
             result.setMessage("注册成功");

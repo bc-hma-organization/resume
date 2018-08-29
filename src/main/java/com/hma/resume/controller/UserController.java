@@ -62,7 +62,9 @@ public class UserController extends HttpServlet{
      */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
     public String showIndex(Model model, HttpSession session){
-	    model.addAttribute("username", session.getAttribute("username").toString());
+	    //根据session获取当前登录用户
+	    User user = this.userService.findByUserName(session.getAttribute("username").toString());
+	    model.addAttribute("user", user);
 	    return "index";
     }
 
@@ -72,7 +74,7 @@ public class UserController extends HttpServlet{
      */
     @RequestMapping(value = "welcome", method = RequestMethod.GET)
     public String showWelcome(Model model, HttpSession session){
-        model.addAttribute("username", session.getAttribute("username").toString());
+        model.addAttribute("user", this.userService.findByUserName(session.getAttribute("username").toString()));
 	    return "welcome";
 	}
 
