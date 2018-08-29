@@ -75,7 +75,9 @@
     </div>
 </body>
 <script>
+    //获取端口
     var host = getHttpHost();
+    //判空
     function usernameIsNull() {
         var username = $('#username').val();
         if (username == "") {
@@ -109,6 +111,7 @@
             return false
         }
     }
+    //保存数据
     $('#btn_sub').click(function () {
 
         usernameIsNull();

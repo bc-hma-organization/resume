@@ -91,7 +91,8 @@ public class UserService {
             result.setMessage("该机构已被注册");
         }else{
             //保存机构信息
-            Organization organizationSave = this.organizationRepository.save(organization);
+            this.organizationRepository.save(organization);
+            Organization organizationSave = this.organizationRepository.findByOrganizaKey(organization.getOrganizaKey());
             //设置该用户为机构用户
             user.setOrganizationID(organizationSave.getId());
             this.userRepository.save(user);

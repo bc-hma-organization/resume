@@ -183,12 +183,12 @@ body{
 }
 
 .layui-form-pane .layui-input,.layui-form-pane .layui-textarea,.layui-form-pane .layui-select{
-	background-color: rgba(0, 0, 0, 0.25);
+	/*background-color: rgba(0, 0, 0, 0.25);*/
 	border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    color: #fff;
+    /*color: #fff;*/
 }
 .layui-input:focus, .layui-textarea:focus, .layui-select:focus {
     border-color: #66afe9;
@@ -475,7 +475,7 @@ img{
 .talent_register{
 	background-color: rgba(0,0,0,0.25);
 	width:700px;
-	height:175%;
+	height:185%;
 	position: absolute;
 	left: 50%;
 	-webkit-transform: translate(-50%);
@@ -532,4 +532,7 @@ img{
 }
 #btn_re{
 	margin-left: 100px;
+}
+.layui-form-select{
+	margin-bottom: 10px;
 }
