@@ -24,7 +24,7 @@
 </head>
 <body>
     <div class="talent_register">
-        <div class="back"><img src="${ctx}/statics/images/back.jpg" width="60"></div>
+        <div class="back"><img src="${ctx}/statics/images/back.jpg" onclick="javascript:history.back(-1)" width="60"></div>
         <div class="t_top">
             <p><strong>机构注册</strong></p>
         </div>
@@ -140,8 +140,8 @@
                     </tbody>
                 </table>
                 <div class="btn_box">
-                    <button id="btn_sub" onclick="inputIsNull()" type="button" class="layui-btn layui-btn-primary layui-btn-radius">提交</button>
-                    <button id="btn_re" type="button" class="layui-btn layui-btn-primary layui-btn-radius">重置</button>
+                    <button id="btn_sub" onclick="inputIsNull()" type="button" class="layui-btn layui-btn-radius">提交</button>
+                    <button id="btn_re" type="button" class="layui-btn layui-btn-warm layui-btn-radius">重置</button>
                 </div>
             </form>
         </div>
