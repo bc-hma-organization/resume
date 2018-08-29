@@ -14,6 +14,11 @@ import java.util.List;
 @Repository
 public interface InfoRepository extends CrudRepository<Info, Integer>{
 
+    /**
+     * 根据用户id查找信息
+     * @param userId
+     * @return
+     */
     @Query(value = "SELECT * FROM info where userID = ?1", nativeQuery = true)
     List<Info> findInfoByUserId(Integer userId);
 
