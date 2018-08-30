@@ -155,4 +155,25 @@ public class UserService {
 	public User findByUserName(String username){
 		return this.userRepository.findByUserName(username);
 	}
+
+	/**
+	 * 保存用户信息
+	 * @param user
+	 * @return
+	 */
+	public Result updateUserInfo(User user){
+		Result result = new Result();
+		if(user.getId() == null){
+			result.setMessage("保存失败，用户信息获取错误");
+			return result;
+		}
+		try{
+			this.userRepository.save(user);
+			result.setSuccess(true);
+			result.setMessage("保存成功");
+		}catch (Exception e){
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }

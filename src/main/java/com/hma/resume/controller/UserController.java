@@ -157,4 +157,27 @@ public class UserController extends HttpServlet{
         Result result = this.userService.saveOrgRegister(user, organization);
 	    return result;
     }
+
+	/**
+	 * 显示个人信息页面
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+	public String updateUser(Model model, HttpSession session){
+    	model.addAttribute("user", this.userService.findByUserName(session.getAttribute("username").toString()));
+    	return "modify-information";
+	}
+
+	/**
+	 * 保存用户信息接口
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
+	public @ResponseBody Result editPost(User user){
+    	Result result = this.userService.updateUserInfo(user);
+		return result;
+	}
 }
