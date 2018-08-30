@@ -5,7 +5,7 @@
         <title>修改个人信息界面</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="${ctx}/statics/css/font.css">
-        <link rel="stylesheet" href="${ctx}/statics/css/register_xadmin.css">
+        <link rel="stylesheet" href="${ctx}/statics/css/modify-information_xadmin.css">
         <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
         <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
@@ -30,6 +30,9 @@
         <col>
         </colgroup>
         <tbody>
+
+
+
 
         <tr>
         <td>用户名：</td>
@@ -195,7 +198,7 @@
         }
         }
 
-        function phoneIsNull() {
+        function ageIsNull() {
         var age = $('#age').val();
         if (age == "") {
         layui.layer.msg("请填写年龄！", {icon: 3, time: 2000, title: "提示"});
@@ -245,6 +248,7 @@
         function goTest(){
             location.href = 'info/upload-info'
         }
+
 
         </script>
         </html>
