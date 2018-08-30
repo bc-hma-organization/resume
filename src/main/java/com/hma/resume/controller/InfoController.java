@@ -33,12 +33,13 @@ public class InfoController {
      * 显示人才上传信息页面
      * @return
      */
-    @RequestMapping(value = "upInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "upload-info", method = RequestMethod.GET)
     public String uploadInfo(Model model, HttpSession session){
         User user = this.infoService.getCurrentUser(session);
         model.addAttribute("user", user);
         model.addAttribute("info", this.infoService.selectInfoByUserId(user.getId()));
-        return "info/upInfo";
+        model.addAttribute("type", "show");
+        return "info/uploadInfo";
     }
 
     /**

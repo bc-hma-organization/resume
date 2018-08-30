@@ -24,6 +24,7 @@
         <hr class="hr15">
         <input id="btnSubmit" value="登录" lay-submit lay-filter="login" style="width:100%;" type="button">
         <hr class="hr20" >
+        <a href="javascript:;" id="register">注册</a>
     </form>
 </div>
 <script>
