@@ -95,7 +95,7 @@ public class UserService {
             Organization organizationSave = this.organizationRepository.findByOrganizaKey(organization.getOrganizaKey());
             //设置该用户为机构用户
             user.setOrganizationID(organizationSave.getId());
-            user.setTurename(organizationSave.getOrganizaName());
+            user.setTrueName(organizationSave.getOrganizaName());
             this.userRepository.save(user);
             result.setSuccess(true);
             result.setMessage("注册成功");
@@ -120,11 +120,11 @@ public class UserService {
 
 	/**
 	 * 根据单位查询用户数量（分页用）
-	 * @param conpanyKey
+	 * @param companyKey
 	 * @return int num
 	 */
-	public Integer findUserNumByConpanyKey(String conpanyKey){
-		return this.userRepository.findUserNumByConpanyKey(conpanyKey);
+	public Integer findUserNumByCompanyKey(String companyKey){
+		return this.userRepository.findUserNumByCompanyKey(companyKey);
 	}
 
 	/**
@@ -134,8 +134,8 @@ public class UserService {
 	 * @param indexNum 一页数量
 	 * @return User list
 	 */
-	public List<User> findUserByConpanyKey(String conpanyKey, Integer startIndex, Integer indexNum){
-		return this.userRepository.findUserByConpanyKey(conpanyKey, startIndex, indexNum);
+	public List<User> findUserByCompanyKey(String conpanyKey, Integer startIndex, Integer indexNum){
+		return this.userRepository.findUserByCompanyKey(conpanyKey, startIndex, indexNum);
 	}
 
     /**

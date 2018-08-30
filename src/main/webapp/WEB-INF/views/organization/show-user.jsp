@@ -15,34 +15,49 @@
 <body>
     <div style="width: 90%;height: 90%;margin-left: 30px">
         <table class="layui-table">
+            <colgroup>
+                <col width="60">
+                <col width="150">
+                <col width="70">
+                <col width="70">
+                <col width="200">
+                <col width="300">
+                <col width="150">
+                <col width="200">
+                <col width="70">
+            </colgroup>
             <thead>
                 <tr>
-                    <th lay-data="{field:'id', width:60, sort: true}">ID</th>
-                    <th lay-data="{field:'username', width:150">真实姓名</th>
-                    <th lay-data="{field:'sex', width:100, sort: true}">性别</th>
-                    <th lay-data="{field:'age', width:60}">年龄</th>
-                    <th lay-data="{field:'ID', width:220}">身份证号码</th>
-                    <th lay-data="{field:'area', width:220, sort: true}">地址</th>
-                    <th lay-data="{field:'phone', width:220, sort: true}">联系方式</th>
-                    <th lay-data="{field:'email', width:220}">邮箱</th>
-                    <th lay-data="{field:'email', width:220}">操作</th>
+                    <th>ID</th>
+                    <th>真实姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>身份证号码</th>
+                    <th>地址</th>
+                    <th>联系方式</th>
+                    <th>邮箱</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
-
-                <tr>
-                    <td>001</td>
-                    <td>李四</td>
-                    <td>男</td>
-                    <td>23</td>
-                    <td>461415199608091234</td>
-                    <td>广东省广州市天河区</td>
-                    <td>12345678903</td>
-                    <td>123@qq.com</td>
-                    <td>
-                        <a href="#">查看</a>
-                    </td>
-                </tr>
+                <c:forEach items="${userList}" var="userList">
+                    <tr>
+                        <td>${userList.id}</td>
+                        <td>${userList.trueName}</td>
+                        <td>
+                        <c:if test="${userList.sex}">男</c:if>
+                        <c:if test="${!userList.sex}">女</c:if>
+                        </td>
+                        <td>${userList.age}</td>
+                        <td>${userList.identityCard}</td>
+                        <td>${userList.address}</td>
+                        <td>${userList.phone}</td>
+                        <td>${userList.email}</td>
+                        <td>
+                            <a href="#">查看</a>
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
 

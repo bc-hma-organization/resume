@@ -64,8 +64,8 @@ public class User {
 	/**
 	 * 真实姓名
 	 */
-	@Column(name = "turename")
-	private String turename;
+	@Column(name = "trueName")
+	private String trueName;
 	
 	/**
 	 * 状态 0/1
@@ -155,12 +155,13 @@ public class User {
 		this.password = password;
 	}
 
-	public String getTurename() {
-		return turename;
+
+	public String getTrueName() {
+		return trueName;
 	}
 
-	public void setTurename(String turename) {
-		this.turename = turename;
+	public void setTrueName(String trueName) {
+		this.trueName = trueName;
 	}
 
 	public Integer getStatus() {

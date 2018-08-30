@@ -32,7 +32,7 @@
     </ul>-->
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">${user.turename}</a>
+            <a href="javascript:;">${user.trueName}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a href="javascript:;" onclick="exit()">退出</a></dd>
             </dl>

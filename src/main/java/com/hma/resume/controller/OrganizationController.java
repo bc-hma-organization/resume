@@ -46,12 +46,12 @@ public class OrganizationController {
         String username = (String) session.getAttribute("username");//获得保存再session中的username
         User user = this.userService.findByUserName(username);//根据用户名查询用户信息，获得机构ID
         Organization organization = this.organizationService.findOrganizationById(user.getOrganizationID());//根据用户表中的机构ID查询机构信息
-        int pageNum = Page.page(this.userService.findUserNumByConpanyKey(organization.getOrganizaKey()), PAGE_MAX_NUM);//获得最大页码
-        List<User> list = this.userService.findUserByConpanyKey(organization.getOrganizaKey(), (page - 1) * PAGE_MAX_NUM, PAGE_MAX_NUM);//获得记录
+        int pageNum = Page.page(this.userService.findUserNumByCompanyKey(organization.getOrganizaKey()), PAGE_MAX_NUM);//获得最大页码
+        List<User> list = this.userService.findUserByCompanyKey(organization.getOrganizaKey(), (page - 1) * PAGE_MAX_NUM, PAGE_MAX_NUM);//获得记录
 
-        model.addAttribute("userList_" + username, list);//保存
-        //session.setAttribute("CURRENT_PAGE_" + username, page);
-        session.setAttribute("MAX_PAGE_" + username, pageNum);
+        model.addAttribute("userList", list);//保存
+        //session.setAttribute("CURRENT_PAGE", page);
+        session.setAttribute("MAX_PAGE", pageNum);
         return "organization/show-user";
 
     }

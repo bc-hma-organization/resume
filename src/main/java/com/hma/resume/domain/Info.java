@@ -72,8 +72,8 @@ public class Info {
 	/**
 	 * 机构码
 	 */
-	@Column(name = "conpanyKey")
-	private  String conpanyKey;
+	@Column(name = "companyKey")
+	private  String companyKey;
 
 	public String getPosition() {
 		return position;
@@ -147,11 +147,11 @@ public class Info {
 		this.education = education;
 	}
 
-	public String getConpanyKey() {
-		return conpanyKey;
+	public String getCompanyKey() {
+		return companyKey;
 	}
 
-	public void setConpanyKey(String conpanyKey) {
-		this.conpanyKey = conpanyKey;
+	public void setCompanyKey(String companyKey) {
+		this.companyKey = companyKey;
 	}
 }
