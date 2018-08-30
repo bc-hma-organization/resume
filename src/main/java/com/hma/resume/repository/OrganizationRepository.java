@@ -16,4 +16,6 @@ public interface OrganizationRepository extends CrudRepository<Organization, Int
      * @return
      */
     Organization findByOrganizaKey(String organizaKey);
+
+    Organization findOrganizationById(Integer id);
 }

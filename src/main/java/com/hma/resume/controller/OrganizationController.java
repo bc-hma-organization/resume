@@ -1,8 +1,10 @@
 package com.hma.resume.controller;
 
 import com.hma.resume.domain.Info;
+import com.hma.resume.domain.Organization;
 import com.hma.resume.domain.User;
 import com.hma.resume.service.InfoService;
+import com.hma.resume.service.OrganizationService;
 import com.hma.resume.service.UserService;
 import com.hma.resume.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -31,31 +32,28 @@ public class OrganizationController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrganizationService organizationService;
+
 //regien 增删查改
     /**
-     * 根据单位查询用户信息
+     * 根据机构登录信息查询用户信息
      * @return
      */
-    @RequestMapping(value = "selectUserByCompany")
-    public String selectUserByCompany(HttpServletRequest request, Model model, String company){
-        HttpSession session = request.getSession();//获得session
-        int page;//声明页面
-        String string_page = (String) session.getAttribute(company + "_CURRENT_PAGE");//活动session中的page
-        if (string_page == null && string_page.equals("")) {//如果在session中存在不存在page，则把page赋值1
-            page = 1;
-        }else {//存在则读取出来
-            page = Integer.parseInt(string_page);
-        }
-        int pageNum = Page.page(this.userService.findUserNumByCompany(company), PAGE_MAX_NUM);//活动最大页码
-        List<User> list = this.userService.findUserByCompany(company, (page-1)*PAGE_MAX_NUM, PAGE_MAX_NUM);//获得记录
-        if (list != null) {//判断
-            model.addAttribute(company + "_userList", list);//保存
-            session.setAttribute(company + "_CURRENT_PAGE", page);
-            session.setAttribute(company + "_MAX_PAGE", pageNum);
-            return "user_info_list";
-        }else {
-            return "menu/404";
-        }
+    @RequestMapping(value = "selectUser", method = RequestMethod.GET)
+    public String selectUser(HttpSession session, Model model, Integer page){
+        String username = (String) session.getAttribute("username");//获得保存再session中的username
+        User user = this.userService.findByUserName(username);//根据用户名查询用户信息，获得机构ID
+        Organization organization = this.organizationService.findOrganizationById(user.getOrganizationID());//根据用户表中的机构ID查询机构信息
+        int pageNum = Page.page(this.userService.findUserNumByConpanyKey(organization.getOrganizaKey()), PAGE_MAX_NUM);//获得最大页码
+        List<User> list = this.userService.findUserByConpanyKey(organization.getOrganizaKey(), (page - 1) * PAGE_MAX_NUM, PAGE_MAX_NUM);//获得记录
+
+        model.addAttribute("userList_" + username, list);//保存
+        //session.setAttribute("CURRENT_PAGE_" + username, page);
+        session.setAttribute("MAX_PAGE_" + username, pageNum);
+        return "organization/show-user";
+
     }
 
     /**
@@ -82,7 +80,6 @@ public class OrganizationController {
     @RequestMapping(value = "updateStatusById")
     public String updateStatusById(){
         Integer flag = 0;
-        System.out.println("===================updateStatusById");
         this.infoService.updateStatusById(1,0);
         if (flag > 0){
             return "success";
