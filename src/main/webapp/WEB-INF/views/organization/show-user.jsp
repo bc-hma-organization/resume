@@ -71,7 +71,7 @@
             //自定义首页、尾页、上一页、下一页文本
             laypage.render({
                 elem: 'demo3'
-                ,count: 70
+                ,count: 3
                 ,first: '首页'
                 ,last: '尾页'
                 ,prev: '<em>←</em>'
