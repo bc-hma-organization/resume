@@ -19,7 +19,7 @@
 <body>
 <div class="x-body layui-anim layui-anim-up">
     <blockquote class="layui-elem-quote">欢迎机构：
-        <span class="x-red">${username}</span>！当前时间:<span id="currentTime"></span></blockquote>
+        <span class="x-red">${user.turename}</span>！当前时间:<span id="currentTime"></span></blockquote>
     <fieldset class="layui-elem-field">
         <legend>开发团队</legend>
         <div class="layui-field-box">
