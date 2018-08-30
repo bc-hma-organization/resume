@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li>
-                    <a _href="./info/upInfo">
+                    <a _href="./info/upload-info">
                         <i class="layui-icon">&#xe6b2;</i>
                         <cite>简历信息</cite>
                     </a>
