@@ -48,7 +48,7 @@
         <ul id="nav">
             <c:if test="${not empty user.organizationID}">
                 <li>
-                    <a _href="javascript:;">
+                    <a _href="organization/selectUser?page=1">
                         <i class="iconfont">&#xe6b2;</i>
                         <cite>认证简历</cite>
                     </a>

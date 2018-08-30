@@ -69,6 +69,12 @@ public class Info {
 	@Column(name = "education")
 	private String education;
 
+	/**
+	 * 机构码
+	 */
+	@Column(name = "conpanyKey")
+	private  String conpanyKey;
+
 	public String getPosition() {
 		return position;
 	}
@@ -140,5 +146,12 @@ public class Info {
 	public void setEducation(String education) {
 		this.education = education;
 	}
-	
+
+	public String getConpanyKey() {
+		return conpanyKey;
+	}
+
+	public void setConpanyKey(String conpanyKey) {
+		this.conpanyKey = conpanyKey;
+	}
 }

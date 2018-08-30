@@ -120,22 +120,22 @@ public class UserService {
 
 	/**
 	 * 根据单位查询用户数量（分页用）
-	 * @param company
+	 * @param conpanyKey
 	 * @return int num
 	 */
-	public Integer findUserNumByCompany(String company){
-		return this.userRepository.findUserNumByCompany(company);
+	public Integer findUserNumByConpanyKey(String conpanyKey){
+		return this.userRepository.findUserNumByConpanyKey(conpanyKey);
 	}
 
 	/**
 	 * 根据单位查询用户信息
-	 * @param company 单位名称
+	 * @param conpanyKey 单位码
 	 * @param startIndex 开始记录
 	 * @param indexNum 一页数量
 	 * @return User list
 	 */
-	public List<User> findUserByCompany(String company, Integer startIndex, Integer indexNum){
-		return this.userRepository.findUserByCompany(company, startIndex, indexNum);
+	public List<User> findUserByConpanyKey(String conpanyKey, Integer startIndex, Integer indexNum){
+		return this.userRepository.findUserByConpanyKey(conpanyKey, startIndex, indexNum);
 	}
 
     /**
