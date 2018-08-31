@@ -56,7 +56,7 @@
             </c:if>
             <c:if test="${empty user.organizationID}">
                 <li>
-                    <a _href="javascript:;">
+                    <a _href="./edit">
                         <i class="layui-icon">&#xe66f;</i>
                         <cite>修改个人信息</cite>
                     </a>

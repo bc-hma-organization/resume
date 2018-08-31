@@ -15,7 +15,9 @@
 
         </head>
         <body>
-        <div class="modify-information">
+
+
+            <div class="modify-information">
         <div class="back"><img src="${ctx}/statics/images/back.jpg" width="60"></div>
         <div class="t_top">
         <p><strong>修改个人信息界面</strong></p>
@@ -32,13 +34,11 @@
         <tbody>
 
 
-
-
         <tr>
         <td>用户名：</td>
         <td>
         <input type="text" id="username" name="username" onblur="usernameIsNull()" lay-verify="required"
-        autocomplete="off" class="layui-input">
+        autocomplete="off" class="layui-input" value="${user.userName}">
         </td>
         <td><span class="msg" id="msg_username"></span></td>
         </tr>
@@ -55,10 +55,10 @@
         <tr>
         <td>新密码：</td>
         <td>
-        <input type="password" id="newpassword" name="newpassword" onblur="newpasswordIsNull()" lay-verify="required"
+        <input type="password" id="newpass" name="newpass" onblur="newpassIsNull()" lay-verify="required"
         autocomplete="off" class="layui-input">
         </td>
-        <td><span class="msg" id="msg_newpassword"></span></td>
+        <td><span class="msg" id="msg_newpass"></span></td>
         </tr>
 
         <tr>
@@ -70,7 +70,18 @@
         <td><span class="msg" id="msg_repass"></span></td>
         </tr>
 
-        <tr>
+            <tr>
+            <td>真实姓名：</td>
+            <td>
+            <input type="text" id="turename" name="turename" onblur="turenameIsNull()" lay-verify="required"
+            autocomplete="off" class="layui-input">
+            </td>
+            <td><span class="msg" id="msg_turename"></span></td>
+            </tr>
+
+
+
+            <tr>
         <td>身份证：</td>
         <td>
         <input type="text" id="identitycard" name="identitycard" onblur="identitycardIsNull()" lay-verify="required"
@@ -117,46 +128,54 @@
 
         </tbody>
         </table>
+
         <div class="btn_box">
-        <button id="btn_sub" onclick="goTest()" type="button" class="layui-btn layui-btn-primary layui-btn-radius">提交</button>
-        <button id="btn_re" type="button" class="layui-btn layui-btn-primary layui-btn-radius">重置</button>
+        <button id="btn_sub" type="button" class="layui-btn layui-btn-primarylayui-btn-lg">提交</button>
+        <button id="btn_re" type="button" class="layui-btn layui-btn-primarylayui-btn-lg">重置</button>
         </div>
+
         </form>
         </div>
         </div>
         </body>
         <script>
-
-        var host = getHttpHost();
-        function usernameIsNull() {
-        var username = $('#username').val();
+         /*
+        *用户名
+         */
+         var host = getHttpHost();
+                function usernameIsNull() {
+                var username = $('#username').val();
         if (username == "") {
-        layui.layer.msg("请填写用户名！", {icon: 3, time: 2000, title: "提示"});
-        return false
+                return false
         }
         }
-
+        /*
+        *密码
+         */
         function passIsNull() {
         var pass = $('#password').val();
         if (pass == "") {
-        layui.layer.msg("请填写密码！", {icon: 3, time: 2000, title: "提示"});
         return false
         }
         }
+        /*
+        * 新密码
+        */
 
         function passIsNull() {
         var newpassword = $('#newpassword').val();
         if (newpassword == "") {
-        layui.layer.msg("请填写新密码！", {icon: 3, time: 2000, title: "提示"});
         return false
         }
         }
+            /*
+            * 确认密码
+            */
 
-        function repassIsNull() {
+            function repassIsNull() {
         var repass = $('#repass').val();
-        var pass = $('#password').val();
+        var repass = $('#newpassword').val();
         if (repass == "") {
-        layui.layer.msg("请填写确认密码！", {icon: 3, time: 2000, title: "提示"});
         return false
         }
         if (repass != newpassword) {
@@ -165,43 +184,61 @@
         }
         }
 
-        function identitycardIsNull() {
+            /*
+            * 真实姓名
+            */
+
+            function turenameIsNull() {
+            var turename = $('#turename').val();
+            if (turename == "") {
+            return false
+            }
+            }
+
+            /*
+            * 身份证
+            */
+
+            function identitycardIsNull() {
         var identitycard = $('#identitycard').val();
         if (identitycard == "") {
-        layui.layer.msg("请填写用户名！", {icon: 3, time: 2000, title: "提示"});
-        return false
+                return false
         }
         }
-
-
-        function emailIsNull() {
+            /*
+            * 邮箱
+            */
+            function emailIsNull() {
         var email = $('#email').val();
         if (email == "") {
-        layui.layer.msg("请填写邮箱！", {icon: 3, time: 2000, title: "提示"});
         return false
         }
         }
+            /*
+            * 地址
+            */
 
-        function useradressIsNull() {
+            function useradressIsNull() {
         var useradress = $('#useradress').val();
         if (useradress == "") {
-        layui.layer.msg("请填写用户地址！", {icon: 3, time: 2000, title: "提示"});
         return false
         }
         }
-
-        function phoneIsNull() {
+            /*
+            * 电话
+            */
+            function phoneIsNull() {
         var phone = $('#phone').val();
         if (phone == "") {
-        layui.layer.msg("请填写电话！", {icon: 3, time: 2000, title: "提示"});
         return false
         }
         }
-
-        function ageIsNull() {
+            /*
+            * 年龄
+            */
+            function ageIsNull() {
         var age = $('#age').val();
         if (age == "") {
-        layui.layer.msg("请填写年龄！", {icon: 3, time: 2000, title: "提示"});
         return false
         }
         }
@@ -209,46 +246,42 @@
 
         $('#btn_sub').click(function () {
 
-        usernameIsNull();
-        passIsNull();
-        newpasswordIsNull();
-        repassIsNull();
-        identitycardIsNull()
-        emailIsNull();
-        useradressISNull();
-        phoneIsNull();
-        ageIsNull();
+            /*usernameIsNull();
+            passIsNull();
+            repassIsNull();
+            identitycardIsNull();
+            emailIsNull();
+            phoneIsNull();
+            ageIsNull();*/
 
-        var user;
-        user
-        var username = $('#username').val();
-        var newpassword = $('#newpassword').val();
-        var pass = $('#password').val();
-        var identitycard = $('#identitycard').val();
-        var email = $('#email').val();
-        var useradress = $('#useradress').val();
-        var phone = $('#phone').val();
-        var age = $('#age').val();
+            var user = {'id':id,'userName': username, 'password': pass, 'newpassword':newpassword,'turename':turename,'identitycard':identitycard ,'email':email,'useradress':useradress,'phone':phone,'age':age,'status': 1};
 
-        $.ajax({
-        type : 'post',
-        url : host+"/resume/talent-register",
-        data : {'userName': username, 'password': pass, 'newpassword':newpassword,'identitycard':identitycard,'email': email, 'useradress':useradress,'phone':phone,'age':age,'status': 1},
-        async: false,
-        success: function (re) {
-        if(re.success){
-        layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
-        location.href = "/resume/login"
-        }else{
-        layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
-        }
-        }
-        })
-        })
-        function goTest(){
-            location.href = 'info/upload-info'
-        }
+            var user;
+            var id = "${user.id}"
+            var username = $('#username').val();
+            var newpassword = $('#newpassword').val();
+            var pass = $('#password').val();
+            var turename = $('#turename').val();
+            var identitycard = $('#identitycard').val();
+            var email = $('#email').val();
+            var useradress = $('#useradress').val();
+            var phone = $('#phone').val();
+            var age = $('#age').val();
 
+            $.ajax({
+            type : 'post',
+            url : host+"/resume/edit",
+            data : {"user": user,"newpassword":newpassword,},
+            async: false,
+            success: function (re){
+            if(re.success){
+            layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
+            }else{
+            layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
+            }
+            }
+            })
+            });
 
         </script>
         </html>
