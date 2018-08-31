@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/info")
@@ -37,8 +38,9 @@ public class InfoController {
     public String uploadInfo(Model model, HttpSession session){
         User user = this.infoService.getCurrentUser(session);
         model.addAttribute("user", user);
-        model.addAttribute("info", this.infoService.selectInfoByUserId(user.getId()));
-        model.addAttribute("type", "show");
+        List<Info> infoList = this.infoService.selectInfoByUserId(user.getId());
+        model.addAttribute("study_info", this.infoService.separateStudy(infoList));
+        model.addAttribute("work_info", this.infoService.separateWork(infoList));
         return "info/uploadInfo";
     }
 
