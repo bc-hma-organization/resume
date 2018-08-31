@@ -26,7 +26,7 @@ public class InfoController {
 
     @RequestMapping(value = "testJSP")
     public String testJSP(){
-        return "organization/show-user";
+        return "menu/modify-information";
     }
 
     /**

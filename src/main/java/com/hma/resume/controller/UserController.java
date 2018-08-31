@@ -167,7 +167,7 @@ public class UserController extends HttpServlet{
     @RequestMapping(value = "edit", method = RequestMethod.GET)
 	public String updateUser(Model model, HttpSession session){
     	model.addAttribute("user", this.userService.findByUserName(session.getAttribute("username").toString()));
-    	return "modify-information";
+    	return "menu/modify-information";
 	}
 
 	/**
