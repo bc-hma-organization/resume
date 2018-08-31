@@ -161,11 +161,19 @@ public class UserService {
 	 * @param user
 	 * @return
 	 */
-	public Result updateUserInfo(User user){
+	public Result updateUserInfo(User user, String newPassword){
 		Result result = new Result();
 		if(user.getId() == null){
 			result.setMessage("保存失败，用户信息获取错误");
 			return result;
+		}
+		User checkUser = this.userRepository.findById(user.getId());
+		//判断输入的原密码与数据库密码是否相同
+		if(!user.getPassword().equals(checkUser.getPassword())){
+			result.setMessage("原密码错误");
+			return result;
+		}else {
+			user.setPassword(newPassword);
 		}
 		try{
 			this.userRepository.save(user);
