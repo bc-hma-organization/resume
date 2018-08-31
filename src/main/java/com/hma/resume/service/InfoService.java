@@ -5,11 +5,15 @@ import com.hma.resume.domain.User;
 import com.hma.resume.dto.Result;
 import com.hma.resume.repository.InfoRepository;
 import com.hma.resume.repository.UserRepository;
+import com.hma.resume.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 信息服务层
@@ -57,13 +61,9 @@ public class InfoService {
 		User user = this.userRepository.findByUserName(username);
 		//设置info表里的userid
 		info.setUserId(user.getId());
-		try{
-			this.infoRepository.save(info);
-			result.setSuccess(true);
-			result.setMessage("保存成功");
-		}catch (Exception e){
-			System.out.println(e.toString());
-		}
+		this.infoRepository.save(info);
+		result.setSuccess(true);
+		result.setMessage("保存成功");
 		return result;
 	}
 
@@ -77,5 +77,33 @@ public class InfoService {
 	    return this.userService.findByUserName(username);
     }
 
+	/**
+	 * 分离学习信息
+	 * @param infoList
+	 * @return
+	 */
+	public List<Info> separateStudy(List<Info> infoList){
+		ArrayList<Info> list = new ArrayList<Info>();
+		for (int i=0; i<infoList.size(); i++){
+			if (infoList.get(i).getEducation() != null){
+				list.add(infoList.get(i));
+			}
+		}
+		return list;
+	}
 
+	/**
+	 * 分离工作信息
+	 * @param infoList
+	 * @return
+	 */
+	public List<Info> separateWork(List<Info> infoList){
+		List<Info> list = new ArrayList<Info>();
+		for (int i=0; i<infoList.size(); i++){
+			if (infoList.get(i).getEducation() == null){
+				list.add(infoList.get(i));
+			}
+		}
+		return list;
+	}
 }

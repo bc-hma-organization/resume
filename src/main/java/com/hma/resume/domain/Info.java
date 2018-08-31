@@ -1,5 +1,7 @@
 package com.hma.resume.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -30,12 +32,14 @@ public class Info {
 	/**
 	 * 开始时间
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "startTime")
 	private Date startTime;
 	
 	/**
 	 * 结束时间
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "endTime")
 	private Date endTime;
 	
