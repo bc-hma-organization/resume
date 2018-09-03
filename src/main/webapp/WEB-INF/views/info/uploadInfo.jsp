@@ -229,6 +229,25 @@
         var position = $('input[name="position"]').eq(0).val();
         var education = $('input[name="education"]').val();
         var description = $('[name="description"]').eq(0).val();
+        if(company == ""){
+            layui.layer.msg("请填写学校/机构名", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(companyKey == ""){
+            layui.layer.msg("请填写机构Key", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(startTime == ""){
+            layui.layer.msg("请填写学习开始时间", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(endTime == ""){
+            layui.layer.msg("请填写学习结束时间", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(position == ""){
+            layui.layer.msg("请填写学历", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(education == ""){
+            layui.layer.msg("请填写学位", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }
         var info = {
             "company": company,
             "companyKey": companyKey,
@@ -264,6 +283,22 @@
         var endTime = $("#work_end").val();
         var position = $('input[name="position"]').eq(1).val();
         var description = $('[name="description"]').eq(1).val();
+        if(company == ""){
+            layui.layer.msg("请填写公司名", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(companyKey == ""){
+            layui.layer.msg("请填写机构Key", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(startTime == ""){
+            layui.layer.msg("请填写开始时间", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(endTime == ""){
+            layui.layer.msg("请填写结束时间", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }else if(position == ""){
+            layui.layer.msg("请填写职位", {icon: 2, time: 2000, title: '提示'});
+            return false
+        }
         var info = {
             "company": company,
             "companyKey": companyKey,
