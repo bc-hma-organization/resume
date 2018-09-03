@@ -41,13 +41,29 @@ public class InfoService {
 
 	/**
 	 * 修改信息状态
-	 * @param infoId
+	 * @param infoIds
 	 * @param status
 	 */
-	public void updateStatusById(Integer infoId,Integer status){
-		this.infoRepository.updateStatusById(infoId,status);
+	public Result updateStatusById(String infoIds, Integer status) {
+		Result result = new Result();
+		if (infoIds == null && status == 0) {
+			result.setMessage("提交失败");
+		} else {
+			String[] arrId = infoIds.split(",");
+			try {
+				for (int i = 0; i < arrId.length; i++) {
+					Info info = selectInfoById(Integer.parseInt(arrId[i]));
+					info.setStatus(status);
+					this.infoRepository.save(info);
+				}
+			} catch (Exception e) {
+				System.out.println("错误为：" + e.toString());
+			}
+			result.setSuccess(true);
+			result.setMessage("提交成功！");
+		}
+		return  result;
 	}
-
 	/**
 	 * 保存上传的信息
 	 * @param info
@@ -76,6 +92,15 @@ public class InfoService {
 	    String username = session.getAttribute("username").toString();
 	    return this.userService.findByUserName(username);
     }
+
+	/**
+	 * 根据id查询信息
+	 * @param id
+	 * @return
+	 */
+	public Info selectInfoById(Integer id) {
+		return this.infoRepository.findInfoById(id);
+	}
 
 	/**
 	 * 分离学习信息

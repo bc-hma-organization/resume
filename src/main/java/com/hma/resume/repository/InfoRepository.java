@@ -26,6 +26,6 @@ public interface InfoRepository extends CrudRepository<Info, Integer>{
     @Query(value = "update info set status = ?2 where ID = ?1", nativeQuery = true)
     void updateStatusById(Integer infoId, Integer status);
 
-
+    Info findInfoById(Integer id);
 
 }

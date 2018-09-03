@@ -46,7 +46,7 @@ public interface UserRepository extends CrudRepository<User, Integer>, JpaSpecif
 	 * @return
 	 */
 	//@Query(value = "SELECT u.ID,u.turename,u.sex,u.age,u.phone,u.identityCard FROM user u INNER JOIN info i ON u.id = i.userID where i.company = ?1", nativeQuery = true)
-	@Query(value = "select u.* FROM user u,info i WHERE u.ID = i.userID AND i.companyKey = ?1 LIMIT ?2,?3", nativeQuery = true)
+	@Query(value = "select u.* FROM user u,info i WHERE u.ID = i.userID AND i.companyKey = ?1 order by CASE i.status WHEN 0 THEN 1 ELSE 2 END LIMIT ?2,?3", nativeQuery = true)
 	List<User> findUserByCompanyKey(String companyKey, Integer startIndex, Integer indexNum);
 }
 

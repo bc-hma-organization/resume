@@ -13,7 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.hma.resume.dto.Result;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -25,8 +26,6 @@ import java.util.List;
 @Transactional
 public class OrganizationController {
 
-    private Integer PAGE_MAX_NUM = 1;
-
     @Autowired
     private InfoService infoService;
 
@@ -37,22 +36,38 @@ public class OrganizationController {
     private OrganizationService organizationService;
 
 //regien 增删查改
+    @RequestMapping(value = "selectUser", method = RequestMethod.GET)
+    public String selectUser() {
+        return "organization/show-user";
+    }
     /**
-     * 根据机构登录信息查询用户信息
+     * 根据机构登录信息查询用户列表
      * @return
      */
-    @RequestMapping(value = "selectUser", method = RequestMethod.GET)
-    public String selectUser(HttpSession session, Model model, Integer page){
-        String username = (String) session.getAttribute("username");//获得保存再session中的username
-        User user = this.userService.findByUserName(username);//根据用户名查询用户信息，获得机构ID
-        Organization organization = this.organizationService.findOrganizationById(user.getOrganizationID());//根据用户表中的机构ID查询机构信息
-        int pageNum = Page.page(this.userService.findUserNumByCompanyKey(organization.getOrganizaKey()), PAGE_MAX_NUM);//获得最大页码
-        List<User> list = this.userService.findUserByCompanyKey(organization.getOrganizaKey(), (page - 1) * PAGE_MAX_NUM, PAGE_MAX_NUM);//获得记录
+    @RequestMapping(value = "selectUser", method = RequestMethod.POST)
+    public @ResponseBody Object selectUser(HttpSession session, Integer start, Integer limit){
+        //获得保存再session中的username
+        String username = (String) session.getAttribute("username");
+        //根据用户名查询用户信息，获得机构ID
+        User user = this.userService.findByUserName(username);
+        //根据用户表中的机构ID查询机构信息
+        Organization organization = this.organizationService.findOrganizationById(user.getOrganizationID());
 
-        model.addAttribute("userList", list);//保存
-        //session.setAttribute("CURRENT_PAGE", page);
-        session.setAttribute("MAX_PAGE", pageNum);
-        return "organization/show-user";
+        Page page = new Page();
+        System.out.println("start初始值" + start);
+        //开始的记录index
+        page.setStart(start * limit);
+        System.out.println("转换后start" + page.getStart());
+        //一页大小
+        page.setLimit(limit);
+        //总页数
+        page.setTotal(this.userService.findUserNumByCompanyKey(organization.getOrganizaKey()));
+
+        //获得记录
+        List<User> list = this.userService.findUserByCompanyKey(organization.getOrganizaKey(), page.getStart(), page.getLimit());
+        page.setRoot(list);
+
+        return page;
 
     }
 
@@ -60,32 +75,31 @@ public class OrganizationController {
      * 根据用户ID查询用户详情
      * @return
      */
-    @RequestMapping(value = "selectInfoByUserId")
-    public String selectInfoByUserId(Model model, Integer userId){
-        User user = this.userService.findById(2);
-        List<Info> infoList = this.infoService.selectInfoByUserId(2);
+    @RequestMapping(value = "selectInfoByUserId", method = RequestMethod.GET)
+    public String selectInfoByUserId(Model model, Integer userId) {
+        //根据id查询用户
+        User user = this.userService.findById(userId);
+        //根据id查询信息列表
+        List<Info> infoList = this.infoService.selectInfoByUserId(userId);
+
         if (user != null && infoList != null){
-            model.addAttribute("userinfo", user);
+            //保存数据到model上
+            model.addAttribute("userInfo", user);
             model.addAttribute("infoList", infoList);
-            return "user_info";
+            return "organization/authentication";
         }else {
             return  "menu/404";
         }
     }
 
     /**
-     * 根据infoID修改状态(未完成)
+     * 根据infoID修改状态
      * @return
      */
-    @RequestMapping(value = "updateStatusById")
-    public String updateStatusById(){
-        Integer flag = 0;
-        this.infoService.updateStatusById(1,0);
-        if (flag > 0){
-            return "success";
-        }else {
-            return  "flase";
-        }
+    @RequestMapping(value = "updateStatusById",method = RequestMethod.POST)
+    public @ResponseBody Result updateStatusById(String infoIds, Integer status){
+        Result result = this.infoService.updateStatusById(infoIds,status);
+        return result;
     }
 
     @RequestMapping(value = "approveInfo-list", method = RequestMethod.GET)
