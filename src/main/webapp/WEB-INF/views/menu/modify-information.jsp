@@ -37,44 +37,17 @@
         <tr>
         <td>用户名：</td>
         <td>
-        <input type="text" id="username" name="username" onblur="usernameIsNull()" lay-verify="required"
+        <input type="text" id="username" name="username"  lay-verify="required"
         autocomplete="off" class="layui-input" value="${user.userName}">
         </td>
         <td><span class="msg" id="msg_username"></span></td>
         </tr>
 
-        <tr>
-        <td>密码：</td>
-        <td>
-        <input type="password" id="password" name="password" onblur="passIsNull()" lay-verify="required"
-        autocomplete="off" class="layui-input">
-        </td>
-        <td><span class="msg" id="msg_pass"></span></td>
-        </tr>
-
-        <tr>
-        <td>新密码：</td>
-        <td>
-        <input type="password" id="newpass" name="newpass" onblur="newpassIsNull()" lay-verify="required"
-        autocomplete="off" class="layui-input">
-        </td>
-        <td><span class="msg" id="msg_newpass"></span></td>
-        </tr>
-
-        <tr>
-        <td>确认密码：</td>
-        <td>
-        <input type="password" id="repass" name="repass" onblur="repassIsNull()" lay-verify="required"
-        autocomplete="off" class="layui-input">
-        </td>
-        <td><span class="msg" id="msg_repass"></span></td>
-        </tr>
-
             <tr>
             <td>真实姓名：</td>
             <td>
-            <input type="text" id="turename" name="turename" onblur="turenameIsNull()" lay-verify="required"
-            autocomplete="off" class="layui-input">
+            <input type="text" id="turename" name="turename"  lay-verify="required"
+            autocomplete="off" class="layui-input"value="${user.trueName}">
             </td>
             <td><span class="msg" id="msg_turename"></span></td>
             </tr>
@@ -84,8 +57,8 @@
             <tr>
         <td>身份证：</td>
         <td>
-        <input type="text" id="identitycard" name="identitycard" onblur="identitycardIsNull()" lay-verify="required"
-        autocomplete="off" class="layui-input">
+        <input type="text" id="identitycard" name="identitycard"  lay-verify="required"
+        autocomplete="off" class="layui-input"value="${user.identityCard}">
         </td>
         <td><span class="msg" id="msg_identitycard"></span></td>
         </tr>
@@ -93,8 +66,8 @@
         <tr>
         <td>用户名邮箱：</td>
         <td>
-        <input type="text" id="email" name="eamil" onblur="emailIsNull()" lay-verify="required" autocomplete="off"
-        class="layui-input">
+        <input type="text" id="email" name="eamil" lay-verify="required" autocomplete="off"
+        class="layui-input"value="${user.email}">
         </td>
         <td><span class="msg" id="msg_email"></span></td>
         </tr>
@@ -102,17 +75,17 @@
         <tr>
         <td>用户地址：</td>
         <td>
-        <input type="text" id="useradress" name="useradress" onblur="useradressIsNull()" lay-verify="required"
-        autocomplete="off" class="layui-input">
+        <input type="text" id="address" name="address" lay-verify="required"
+        autocomplete="off" class="layui-input"value="${user.address}">
         </td>
-        <td><span class="msg" id="msg_useradress"></span></td>
+        <td><span class="msg" id="msg_address"></span></td>
         </tr>
 
         <tr>
         <td>电话：</td>
         <td>
-        <input type="text" id="phone" name="phone" onblur="phoneIsNull()" lay-verify="required"
-        autocomplete="off" class="layui-input">
+        <input type="text" id="phone" name="phone" lay-verify="required"
+        autocomplete="off" class="layui-input"value="${user.phone}">
         </td>
         <td><span class="msg" id="msg_phone"></span></td>
         </tr>
@@ -120,8 +93,8 @@
         <tr>
         <td>年龄：</td>
         <td>
-        <input type="text" id="age" name="age" onblur="ageIsNull()" lay-verify="required"
-        autocomplete="off" class="layui-input">
+        <input type="text" id="age" name="age" lay-verify="required"
+        autocomplete="off" class="layui-input"value="${user.age}">
         </td>
         <td><span class="msg" id="msg_age"></span></td>
         </tr>
@@ -149,40 +122,7 @@
                 return false
         }
         }
-        /*
-        *密码
-         */
-        function passIsNull() {
-        var pass = $('#password').val();
-        if (pass == "") {
-        return false
-        }
-        }
-        /*
-        * 新密码
-        */
 
-        function passIsNull() {
-        var newpassword = $('#newpassword').val();
-        if (newpassword == "") {
-        return false
-        }
-        }
-            /*
-            * 确认密码
-            */
-
-            function repassIsNull() {
-        var repass = $('#repass').val();
-        var repass = $('#newpassword').val();
-        if (repass == "") {
-        return false
-        }
-        if (repass != newpassword) {
-        layui.layer.msg("确认密码要与新密码一致！", {icon: 3, time: 2000, title: "提示"});
-        return false
-        }
-        }
 
             /*
             * 真实姓名
@@ -218,9 +158,9 @@
             * 地址
             */
 
-            function useradressIsNull() {
-        var useradress = $('#useradress').val();
-        if (useradress == "") {
+            function addressIsNull() {
+        var address = $('#address').val();
+        if (address == "") {
         return false
         }
         }
@@ -244,44 +184,56 @@
         }
 
 
-        $('#btn_sub').click(function () {
+$('#btn_sub').click(function () {
 
-            /*usernameIsNull();
-            passIsNull();
-            repassIsNull();
-            identitycardIsNull();
-            emailIsNull();
-            phoneIsNull();
-            ageIsNull();*/
+/*usernameIsNull();
+passIsNull();
+repassIsNull();
+identitycardIsNull();
+emailIsNull();
+phoneIsNull();
+ageIsNull();*/
 
-            var user = {'id':id,'userName': username, 'password': pass, 'newpassword':newpassword,'turename':turename,'identitycard':identitycard ,'email':email,'useradress':useradress,'phone':phone,'age':age,'status': 1};
+var flag = repassIsNull();
+if(!flag) return false
+var user;
+var id = "${user.id}"
+var username = $('#username').val();
 
-            var user;
-            var id = "${user.id}"
-            var username = $('#username').val();
-            var newpassword = $('#newpassword').val();
-            var pass = $('#password').val();
-            var turename = $('#turename').val();
-            var identitycard = $('#identitycard').val();
-            var email = $('#email').val();
-            var useradress = $('#useradress').val();
-            var phone = $('#phone').val();
-            var age = $('#age').val();
+var turename = $('#turename').val();
+var identitycard = $('#identitycard').val();
+var email = $('#email').val();
+var address = $('#address').val();
+var phone = $('#phone').val();
+var age = $('#age').val();
+var data;
 
-            $.ajax({
-            type : 'post',
-            url : host+"/resume/edit",
-            data : {"user": user,"newpassword":newpassword,},
-            async: false,
-            success: function (re){
+            data = {
+                'id':id,
+                'userName': username,
+                'turename':turename,
+                'identitycard':identitycard ,
+                'email':email
+                ,'address':address,
+                'phone':phone,
+                'age':age,
+                'status': 1
+            }
+
+    $.ajax({
+        type : 'post',
+        url : host+"/resume/edit",
+        data : data ,
+        async: false,
+        success: function (re){
             if(re.success){
-            layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
+                layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
             }else{
-            layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
+                layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
             }
-            }
-            })
-            });
+        }
+    })
+});
 
         </script>
         </html>
