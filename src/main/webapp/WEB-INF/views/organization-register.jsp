@@ -224,7 +224,7 @@
             description: description,
             /*status: 1*/
         }
-        保存数据
+        //保存数据
         $.ajax({
             type: 'post',
             url: host+"/resume/organization-register",
