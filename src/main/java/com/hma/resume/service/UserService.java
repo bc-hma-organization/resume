@@ -5,6 +5,7 @@ import com.hma.resume.domain.User;
 import com.hma.resume.dto.Result;
 import com.hma.resume.repository.OrganizationRepository;
 import com.hma.resume.repository.UserRepository;
+import com.hma.resume.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,12 @@ public class UserService {
 	public Result<User> checkPassword(String username, String password) {
 		Result<User> result = new Result();
 		User user = this.userRepository.findByUserName(username);
+		MD5Util md5 = new MD5Util();
+		try{
+		    password = md5.md5Encode(password);
+        }catch (Exception e){
+		    System.out.println(e.toString());
+        }
 		if(user == null) {
 			result.setSuccess(false);
 			result.setMessage("此用户不存在，请输入正确的用户名！");
@@ -52,12 +59,15 @@ public class UserService {
 	 */
 	public Result saveRegister(User user){
 		Result result = new Result();
+		MD5Util md5 = new MD5Util();
 		if(user == null){
 			result.setMessage("注册失败");
 		}else if(null != this.userRepository.findByUserName(user.getUserName())){
 			result.setMessage("该用户名已注册");
 		}else{
 		    try{
+		        //加密保存密码
+		        user.setPassword(md5.md5Encode(user.getPassword()));
 		        this.userRepository.save(user);
             }catch (Exception e){
 		        System.out.println(e.toString());
@@ -76,6 +86,7 @@ public class UserService {
      */
     public Result saveOrgRegister(User user, Organization organization){
 	    Result result = new Result();
+	    MD5Util md5 = new MD5Util();
 	    //判断用户提交信息
 	    if(user == null){
 	        result.setMessage("请填写用户信息");
@@ -90,6 +101,12 @@ public class UserService {
         }else if(null != this.organizationRepository.findByOrganizaKey(organization.getOrganizaKey())){
             result.setMessage("该机构已被注册");
         }else{
+            try{
+                //加密保存密码
+                user.setPassword(md5.md5Encode(user.getPassword()));
+            }catch (Exception e){
+                System.out.println(e.toString());
+            }
             //保存机构信息
             this.organizationRepository.save(organization);
             Organization organizationSave = this.organizationRepository.findByOrganizaKey(organization.getOrganizaKey());
@@ -161,20 +178,29 @@ public class UserService {
 	 * @param user
 	 * @return
 	 */
-	public Result updateUserInfo(User user, String newPassword){
+	public Result updateUserInfo(User user){
 		Result result = new Result();
+		MD5Util md5 = new MD5Util();
 		if(user.getId() == null){
 			result.setMessage("保存失败，用户信息获取错误");
 			return result;
 		}
-		User checkUser = this.userRepository.findById(user.getId());
+		//根据id查找数据库对应的用户
+		/*User checkUser = this.userRepository.findById(user.getId());
+		try{
+		    //加密密码
+		    user.setPassword(md5.md5Encode(user.getPassword()));
+		    newPassword = md5.md5Encode(newPassword);
+        }catch (Exception e){
+		    System.out.println(e.toString());
+        }
 		//判断输入的原密码与数据库密码是否相同
 		if(!user.getPassword().equals(checkUser.getPassword())){
 			result.setMessage("原密码错误");
 			return result;
 		}else {
 			user.setPassword(newPassword);
-		}
+		}*/
 		try{
 			this.userRepository.save(user);
 			result.setSuccess(true);

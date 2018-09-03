@@ -176,8 +176,8 @@ public class UserController extends HttpServlet{
 	 * @return
 	 */
 	@RequestMapping(value = "edit", method = RequestMethod.POST)
-	public @ResponseBody Result editPost(User user, String newPassword){
-    	Result result = this.userService.updateUserInfo(user, newPassword);
+	public @ResponseBody Result editPost(User user){
+    	Result result = this.userService.updateUserInfo(user);
 		return result;
 	}
 }
