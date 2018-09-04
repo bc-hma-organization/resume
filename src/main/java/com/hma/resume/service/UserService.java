@@ -186,7 +186,30 @@ public class UserService {
 			return result;
 		}
 		//根据id查找数据库对应的用户
-		/*User checkUser = this.userRepository.findById(user.getId());
+		User checkUser = this.userRepository.findById(user.getId());
+		if (user.getAddress() != null && user.getAddress() != ""){
+			checkUser.setAddress(user.getAddress());
+		}
+		if (user.getAge() != null && user.getAge() != 0){
+			checkUser.setAge(user.getAge());
+		}
+		if (user.getEmail() != null && user.getEmail() != ""){
+			checkUser.setEmail(user.getEmail());
+		}
+		if (user.getIdentityCard() != null && user.getIdentityCard() != ""){
+			checkUser.setIdentityCard(user.getIdentityCard());
+		}
+		if (user.getPassword() != null && user.getPassword() != ""){
+			checkUser.setPassword(user.getPassword());
+		}
+		if (user.getTrueName() != null && user.getTrueName() != ""){
+			checkUser.setTrueName(user.getTrueName());
+		}
+		if (user.getPhone() != null && user.getPhone() != ""){
+			checkUser.setPhone(user.getPhone());
+		}
+
+		/*
 		try{
 		    //加密密码
 		    user.setPassword(md5.md5Encode(user.getPassword()));
@@ -202,7 +225,7 @@ public class UserService {
 			user.setPassword(newPassword);
 		}*/
 		try{
-			this.userRepository.save(user);
+			this.userRepository.save(checkUser);
 			result.setSuccess(true);
 			result.setMessage("保存成功");
 		}catch (Exception e){

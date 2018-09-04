@@ -64,7 +64,7 @@
         </tr>
 
         <tr>
-        <td>用户名邮箱：</td>
+        <td>邮箱：</td>
         <td>
         <input type="text" id="email" name="eamil" lay-verify="required" autocomplete="off"
         class="layui-input"value="${user.email}">
@@ -194,25 +194,23 @@ emailIsNull();
 phoneIsNull();
 ageIsNull();*/
 
-var flag = repassIsNull();
-if(!flag) return false
+
+
 var user;
 var id = "${user.id}"
-var username = $('#username').val();
-
-var turename = $('#turename').val();
+var userName = $('#username').val();
+var trueName = $('#turename').val();
 var identitycard = $('#identitycard').val();
 var email = $('#email').val();
 var address = $('#address').val();
 var phone = $('#phone').val();
 var age = $('#age').val();
 var data;
-
             data = {
                 'id':id,
-                'userName': username,
-                'turename':turename,
-                'identitycard':identitycard ,
+                'userName': userName,
+                'trueName':trueName,
+                'identityCard':identitycard ,
                 'email':email
                 ,'address':address,
                 'phone':phone,
