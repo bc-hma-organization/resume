@@ -12,6 +12,7 @@
     <title>注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${ctx}/statics/css/font.css">
+    <link rel="stylesheet" href="${ctx}/statics/layui/css/layui.css">
     <link rel="stylesheet" href="${ctx}/statics/css/register_xadmin.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>

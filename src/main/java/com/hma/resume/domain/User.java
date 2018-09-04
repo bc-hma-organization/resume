@@ -26,7 +26,7 @@ public class User {
 	private String userName;
 	
 	/**
-	 * 性别
+	 * 性别 true-女	false-男
 	 */
 	@Column(name = "sex")
 	private Boolean sex;

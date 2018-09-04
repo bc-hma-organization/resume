@@ -12,6 +12,7 @@
     <title>注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${ctx}/statics/css/font.css">
+    <link rel="stylesheet" href="${ctx}/statics/layui/css/layui.css">
     <link rel="stylesheet" href="${ctx}/statics/css/register_xadmin.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -19,7 +20,6 @@
     <script src="${ctx}/statics/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${ctx}/statics/js/xadmin.js"></script>
     <script type="text/javascript" src="${ctx}/statics/js/request.js"></script>
-
     <script type="text/javascript" src="${ctx}/statics/js/address.js"></script>
 </head>
 <body>
@@ -82,7 +82,7 @@
                         <td><button type="button" class="layui-btn" id="test1">上传图片</button></td>
                     </tr>--%>
                     <tr>
-                        <td>机构地址：</td>
+                        <td>机构所在地区：</td>
                         <td>
                             <div class="layui-input-inline">
                                 <select id="province" name="province" lay-filter="province" class="province">
@@ -103,7 +103,11 @@
                         <td><span class="msg" id="msg_organizaAddress"></span></td>
                     </tr>
                     <tr>
-                        <td>机构号码：</td>
+                        <td>街道地址：</td>
+                        <td><input id="street" class="layui-input" placeholder="请填写街道地址，请勿重复填写省市区"></td>
+                    </tr>
+                    <tr>
+                        <td>机构电话：</td>
                         <td>
                             <input type="text" id="organizaPhone" name="organizaPhone" lay-verify="required" autocomplete="off" class="layui-input">
                         </td>
@@ -133,7 +137,7 @@
                     <tr>
                         <td>机构简介：</td>
                         <td>
-                            <input type="text" id="description" name="description" lay-verify="required" autocomplete="off" class="layui-input">
+                            <textarea id="description" name="description" style="width: 100%;min-height: 100px;resize: vertical;" placeholder="请描述一下您的机构"></textarea>
                         </td>
                         <td><span class="msg" id="msg_description"></span></td>
                     </tr>
@@ -161,7 +165,8 @@
         var province = $('#province option:selected').text();
         var city = $('#city option:selected').text();
         var area = $('#area option:selected').text();
-        var organizaAddress = province + city + area;
+        var street = $("#street").val();
+        var organizaAddress = province + city + area + street;
         var organizaPhone = $('#organizaPhone').val();
         var legalPerson = $('#legalPerson').val();
         var contact = $('#contact').val();
@@ -196,6 +201,8 @@
         }else if (area == "请选择县/区"){
             layui.layer.msg("请选择县/区！", {icon: 3, time: 2000, title: "提示"});
             return false;
+        }else if(street == ""){
+            layui.layer.msg("请填写街道", {icon: 3, time:2000, title:'提示'});
         }else if (organizaPhone == ""){
             layui.layer.msg("请填写机构号码！", {icon: 3, time: 2000, title: "提示"});
             return false;
@@ -221,7 +228,7 @@
             legalPerson: legalPerson,
             contact: contact,
             contactPhone: contactPhone,
-            description: description,
+            description: description
             /*status: 1*/
         }
         //保存数据
@@ -236,8 +243,9 @@
             async: false,
             success: function (re) {
                 if(re.success){
-                    layui.layer.msg(re.message, {icon: 1, time: 2000, title: '提示'});
-                    location.href = "/resume/login"
+                    layui.layer.msg(re.message, {icon: 1, time: 1000, title: '提示'}, function () {
+                        location.href = "/resume/login"
+                    });
                 }else{
                     layui.layer.msg(re.message, {icon: 2, time: 2000, title: '提示'});
                 }
@@ -245,6 +253,26 @@
 
         })
     }
+
+    //点击重置按钮，表单置空
+    $("#btn_re").click(function () {
+        layui.layer.confirm('重置信息？', {
+            btn : [ '确定', '取消' ]//按钮
+        }, function(index) {
+            //清空数据
+            $('#username').val("");
+            $('#password').val('');
+            $('#repass').val('');
+            $('#organizaName').val('');
+            $('#organizaKey').val('');
+            $('#organizaPhone').val('');
+            $('#legalPerson').val('');
+            $('#contact').val('');
+            $('#contactPhone').val('');
+            $('#description').val('');
+            layui.layer.close(index)
+        });
+    });
 
 </script>
 <script type="text/javascript" src="${ctx}/statics/js/address.js"></script>

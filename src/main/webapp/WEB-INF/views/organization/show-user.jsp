@@ -163,8 +163,7 @@
         if(data.length>0){
             $("#tbody").html(s);
         }else{
-            $("#tbody").hide();
-            $("#tbody").html("<br/><span style='width:10%;height:30px;display:block;margin:0 auto;'>暂无数据</span>");
+            $("#tbody").append("<tr><td colspan='9' style='text-align: center;'>暂无数据</td></tr>");
         }
         getSex();
     }

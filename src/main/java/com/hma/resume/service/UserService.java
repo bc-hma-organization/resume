@@ -199,15 +199,13 @@ public class UserService {
 		if (user.getIdentityCard() != null && user.getIdentityCard() != ""){
 			checkUser.setIdentityCard(user.getIdentityCard());
 		}
-		if (user.getPassword() != null && user.getPassword() != ""){
-			checkUser.setPassword(user.getPassword());
-		}
 		if (user.getTrueName() != null && user.getTrueName() != ""){
 			checkUser.setTrueName(user.getTrueName());
 		}
 		if (user.getPhone() != null && user.getPhone() != ""){
 			checkUser.setPhone(user.getPhone());
 		}
+		checkUser.setSex(user.getSex());
 
 		/*
 		try{
