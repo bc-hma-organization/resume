@@ -102,7 +102,7 @@
                     <span style="margin-left: 10%;font-size: 20px;">${study.position}</span>
                     <span style="margin-left: 10%;font-size: 20px;">${study.education}</span>
                 </div>
-                <p style="margin-top: 10px;">描述：<c:if test="${empty study.description}">无</c:if>${study.description}</p>
+                <p style="margin-top: 10px;line-height: 1.5;letter-spacing:10px;">描述：<c:if test="${empty study.description}">无</c:if>${study.description}</p>
             </div>
         </c:forEach>
     </fieldset>
@@ -158,7 +158,7 @@
                     <label class="company_name">${work.company}</label>
                     <span style="margin-left: 10%;font-size: 20px;">${work.position}</span>
                 </div>
-                <p style="margin-top: 10px;">描述：<c:if test="${empty work.description}">无</c:if>${work.description}</p>
+                <p style="margin-top: 10px;line-height: 1.5;letter-spacing:10px;">描述：<c:if test="${empty work.description}">无</c:if>${work.description}</p>
             </div>
         </c:forEach>
     </fieldset>
