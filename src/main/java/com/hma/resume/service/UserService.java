@@ -1,8 +1,10 @@
 package com.hma.resume.service;
 
+import com.hma.resume.domain.Info;
 import com.hma.resume.domain.Organization;
 import com.hma.resume.domain.User;
 import com.hma.resume.dto.Result;
+import com.hma.resume.repository.InfoRepository;
 import com.hma.resume.repository.OrganizationRepository;
 import com.hma.resume.repository.UserRepository;
 import com.hma.resume.util.MD5Util;
@@ -22,6 +24,9 @@ public class UserService {
 
 	@Autowired
     private OrganizationRepository organizationRepository;
+
+	@Autowired
+    private InfoRepository infoRepository;
 
 	/**
 	 * 登陆密码判断
@@ -207,6 +212,13 @@ public class UserService {
 		}
 		checkUser.setSex(user.getSex());
 
+		//如果修改了个人信息，则重置info状态
+		if(!user.getAddress().equals(checkUser.getAddress()) || !user.getAge().equals(checkUser.getAge())
+        || !user.getEmail().equals(checkUser.getEmail()) || !user.getIdentityCard().equals(checkUser.getIdentityCard())
+        || !user.getTrueName().equals(checkUser.getTrueName()) || !user.getPhone().equals(checkUser.getTrueName())
+        || user.getSex() != checkUser.getSex()){
+		    resetInfo(checkUser);
+        }
 		/*
 		try{
 		    //加密密码
@@ -231,4 +243,18 @@ public class UserService {
 		}
 		return result;
 	}
+
+    /**
+     * 重置信息状态和上链地址
+     * @param user
+     */
+	public void resetInfo(User user){
+	    //根据用户id获取info列表
+	    List<Info> infos = this.infoRepository.findInfoByUserId(user.getId());
+	    for(Info info: infos){
+	        info.setStatus(0);
+        }
+        //置空上链地址
+        user.setChainAddress(null);
+    }
 }

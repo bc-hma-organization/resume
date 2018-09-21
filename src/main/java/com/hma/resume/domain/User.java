@@ -91,6 +91,20 @@ public class User {
 	@Column(name = "identityCard")
 	private String identityCard;
 
+	/**
+	 * 链地址
+	 */
+	@Column(name = "chainAddress")
+	private String chainAddress;
+
+	public String getChainAddress() {
+		return chainAddress;
+	}
+
+	public void setChainAddress(String chainAddress) {
+		this.chainAddress = chainAddress;
+	}
+
 	public Integer getId() {
 		return id;
 	}

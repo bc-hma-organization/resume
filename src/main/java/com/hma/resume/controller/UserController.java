@@ -8,6 +8,11 @@ import com.hma.resume.domain.Organization;
 import com.hma.resume.domain.User;
 import com.hma.resume.dto.Result;
 import com.hma.resume.service.UserService;
+import com.hma.resume.util.StrToHex;
+import org.bcos.evidence.app.BcosApp;
+import org.bcos.evidence.sample.EvidenceData;
+import org.bcos.evidence.web3j.Evidence;
+import org.bcos.web3j.abi.datatypes.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,6 +57,19 @@ public class UserController extends HttpServlet{
 			//设置username缓存
 			request.getSession(true).setAttribute("username", result.getData().getUserName());
 			session.setMaxInactiveInterval(1800);
+			/*try{
+				BcosApp app = new BcosApp();
+				boolean config = app.loadConfig();
+				EvidenceData evidenceData = app.getEvidence("user.jks", "123456", "123456", result.getData().getChainAddress());
+				StrToHex code = new StrToHex();
+				String hash = evidenceData.getEvidenceHash();
+				hash = hash.substring(2, hash.length());
+				String data = code.decode(hash);
+				System.out.println("上链数据：" + data);
+				if(!config) result.setMessage("登录成功，加载区块链失败，请联系管理员");
+			}catch (Exception e){
+				e.printStackTrace();
+			}*/
 		}
 		return result;
 	}

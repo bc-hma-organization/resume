@@ -79,6 +79,20 @@ public class Info {
 	@Column(name = "companyKey")
 	private  String companyKey;
 
+	/**
+	 * 信息状态 0-学习 1-工作
+	 */
+	@Column(name = "type")
+	private Integer type;
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
 	public String getPosition() {
 		return position;
 	}

@@ -35,7 +35,7 @@ public class OrganizationController {
     @Autowired
     private OrganizationService organizationService;
 
-//regien 增删查改
+    //regien 增删查改
     @RequestMapping(value = "selectUser", method = RequestMethod.GET)
     public String selectUser() {
         return "organization/show-user";
@@ -81,7 +81,6 @@ public class OrganizationController {
         User user = this.userService.findById(userId);
         //根据id查询信息列表
         List<Info> infoList = this.infoService.selectInfoByUserId(userId);
-
         if (user != null && infoList != null){
             //保存数据到model上
             model.addAttribute("userInfo", user);
@@ -97,15 +96,9 @@ public class OrganizationController {
      * @return
      */
     @RequestMapping(value = "updateStatusById",method = RequestMethod.POST)
-    public @ResponseBody Result updateStatusById(String infoIds, Integer status){
-        Result result = this.infoService.updateStatusById(infoIds,status);
+    public @ResponseBody Result updateStatusById(Integer userId, String infoIds, Integer status){
+        Result result = this.infoService.updateStatusById(userId,infoIds,status);
         return result;
-    }
-
-    @RequestMapping(value = "approveInfo-list", method = RequestMethod.GET)
-    public String approveList(Model model){
-
-        return "organization/approveInfo-list";
     }
 }
 // endregien
